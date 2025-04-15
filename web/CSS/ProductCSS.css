@@ -1,0 +1,82 @@
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 40px; /* 🔥 more spacing between items */
+  padding: 40px;
+  justify-items: center;
+}
+
+
+
+/* Individual product items */
+.product-item {
+  width: 250px; /* ✅ fixed width for neat grid alignment */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product images */
+.product-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Product titles */
+.product-item h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+/* Product prices */
+.price {
+  color: #b12704;
+  font-size: 1.1em;
+  margin: 5px 0;
+}
+
+/* Add to cart button */
+.product-item button {
+  background-color: #f0c14b;
+  border: 1px solid #a88734;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Hover effect for product items */
+.product-item:hover {
+  transform: scale(1.05);
+}
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* Parent container */
+.container {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Optional: Styling the inner container */
+.inner-container {
+  width: 90%;
+  max-width: 1300px; /* allow a wider layout if needed */
+}
