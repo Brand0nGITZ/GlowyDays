@@ -27,9 +27,8 @@
         </section>
       
         <h1>Main page</h1>
-        <ul><li><a href="Product.jsp">Product</a></li>
+        <li><a href="${pageContext.request.contextPath}/ProductServlet" target="_blank">View Products</a></li>
       <li><a href="Cart.jsp">Cart</a></li>
-      <a href="${pageContext.request.contextPath}/ProductServlet" target="_blank">View Products</a>
        <li><a href="Register.jsp">Register</a></li>
        
         </ul>
