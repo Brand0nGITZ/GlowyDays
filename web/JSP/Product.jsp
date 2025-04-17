@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductCSS.css?v=3">
+        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductCSS.css?v=4">
         <title>Product</title>
         <style>
             .cart-container {
@@ -72,10 +72,12 @@
                     %>
                         <article class="product-item">
                             <form action="<%= request.getContextPath() %>/CartServlet" method="POST" class="add-to-cart-form">
-                                <figure>
-                                    <img class="product-image" src="<%= request.getContextPath() %>/ProductImages/<%= p.getImageUrl() %>" alt="<%= p.getName() %>">
-                                    <figcaption><%= p.getName() %></figcaption>
-                                </figure>
+                               <figure>
+                                       <a href="ProductDetailsServlet?id=<%= p.getId() %>">
+                                        <img class="product-image" src="<%= request.getContextPath() %>/ProductImages/<%= p.getImageUrl() %>" alt="<%= p.getName() %>">
+                                        </a>
+                                        <figcaption><%= p.getName() %></figcaption>
+                                        </figure>
                                 <h2><%= p.getName() %></h2>
                                 <p class="price">RM<%= String.format("%.2f", p.getPrice()) %></p>
                                 <p><%= p.getDescription() %></p>

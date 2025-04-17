@@ -49,7 +49,7 @@ public class ProductDAO {
     public Product getProductByName(String name) {
     Product product = null;
     
-    String sql = "SELECT * FROM products WHERE name = ?";
+    String sql = "SELECT * FROM APP.PRODUCTS WHERE PRODUCT_NAME = ?";
     
     try (Connection conn = DriverManager.getConnection(host, user, password);
          PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -59,11 +59,11 @@ public class ProductDAO {
 
         if (rs.next()) {
             product = new Product();
-            product.setId(rs.getInt("id"));
-            product.setName(rs.getString("name"));
-            product.setPrice(rs.getDouble("price"));
-            product.setDescription(rs.getString("description"));
-            product.setImageUrl(rs.getString("image_url"));
+            product.setId(rs.getInt("PRODUCT_ID"));
+            product.setName(rs.getString("PRODUCTNAME"));
+            product.setPrice(rs.getDouble("PRICE"));
+            product.setDescription(rs.getString("DESCRIPTION"));
+            product.setImageUrl(rs.getString("IMAGE_URL"));
         }
 
     } catch (Exception e) {
@@ -73,17 +73,38 @@ public class ProductDAO {
     return product;
 }
     
+     
+    public Product getProductById(int id) {
+    Product product = null;
+    try (Connection conn = DriverManager.getConnection(host, user, password)) {
+        String query = "SELECT * FROM APP.PRODUCTS WHERE PRODUCT_ID = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+             product = new Product();
+            product.setId(rs.getInt("PRODUCT_ID"));
+            product.setName(rs.getString("PRODUCTNAME"));
+            product.setPrice(rs.getDouble("PRICE"));
+            product.setDescription(rs.getString("DESCRIPTION"));
+            product.setImageUrl(rs.getString("IMAGE_URL"));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return product;
+}
     
-   public static void main(String[] args) {
+    
+    
+       public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         List<Product> products = dao.getAllProducts();
         for (Product p : products) {
             System.out.println(p.getName() + " - RM" + p.getPrice());
         }
     }
-    
-    
-    
     
     
 }
