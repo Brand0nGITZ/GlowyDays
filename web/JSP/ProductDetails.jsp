@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title><%= p.getName() %> Details</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductCSS.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductDetails.css">
 </head>
 <body>
     <div class="product-detail-container">
@@ -20,6 +20,7 @@
         <form action="<%= request.getContextPath() %>/CartServlet" method="POST">
             <input type="hidden" name="PRODUCT_ID" value="<%= p.getId() %>" />
             <input type="hidden" name="PRODUCTNAME" value="<%= p.getName() %>" />
+            
             <input type="hidden" name="PRICE" value="<%= p.getPrice() %>" />
             <button type="submit">Add to Cart</button>
         </form>
