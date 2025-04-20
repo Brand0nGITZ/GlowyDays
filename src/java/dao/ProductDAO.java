@@ -95,16 +95,62 @@ public class ProductDAO {
     }
     return product;
 }
+    public List<Product> getProductsByPromotion(int promoId) {
+    List<Product> products = new ArrayList<>();
+    String sql = "SELECT p.* FROM APP.PRODUCTS p " +
+             "JOIN APP.PROMOTION_PRODUCT pp ON p.PRODUCT_ID = pp.PRODUCT_ID " +
+             "WHERE pp.PROMO_ID = ?";
+
+    try (Connection conn = DriverManager.getConnection(host, user, password);
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, promoId);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Product product = new Product();
+            product.setId(rs.getInt("PRODUCT_ID"));
+            product.setName(rs.getString("PRODUCTNAME"));
+            product.setPrice(rs.getDouble("PRICE"));
+            product.setImageUrl(rs.getString("IMAGE_URL"));
+            products.add(product);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return products;
+}
     
+     public int getActivePromotionId() {
+    String sql = "SELECT PROMOTION_ID FROM APP.PROMOTION WHERE CURRENT_DATE BETWEEN START_DATE AND END_DATE AND IS_ACTIVE = TRUE";
+    try (Connection conn = DriverManager.getConnection(host, user, password);
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("PROMOTION_ID");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return -1; // No active promotion found
+}
+
     
     
        public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        List<Product> products = dao.getAllProducts();
+       ProductDAO dao = new ProductDAO();
+       int promoId = 1000; 
+       List<Product> products = dao.getProductsByPromotion(promoId);
+
         for (Product p : products) {
-            System.out.println(p.getName() + " - RM" + p.getPrice());
+            System.out.println("Product ID: " + p.getId());
+            System.out.println("Name: " + p.getName());
+            System.out.println("Price: " + p.getPrice());
+            System.out.println("Image url " + p.getImageUrl());
+}
+    
+      
         }
-    }
-    
-    
 }

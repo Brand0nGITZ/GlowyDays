@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, model.Promotion" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +20,7 @@
                     <div class="dropdown">
                         <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
                         <div class="dropdown-content">
-                            <a href="#">Skincare</a>
+                            <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>
                             <a href="#">Makeup</a>
                             <a href="#">Hair Care</a>
                             <a href="#">Body Care</a>

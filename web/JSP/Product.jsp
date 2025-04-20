@@ -8,40 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductCSS.css?v=4">
         <title>Product</title>
-        <style>
-            .cart-container {
-                position: relative;
-                display: inline-block;
-            }
-
-            .cart-badge {
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                background-color: red;
-                color: white;
-                border-radius: 50%;
-                width: 20px;
-                height: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 12px;
-                font-weight: bold;
-            }
-
-            .product-added-message {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background-color: #4CAF50;
-                color: white;
-                padding: 15px;
-                border-radius: 5px;
-                display: none;
-                z-index: 1000;
-            }
-        </style>
+        
     </head>
     <body> 
         <div id="productAddedMessage" class="product-added-message">
