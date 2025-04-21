@@ -6,6 +6,7 @@ public class CartItem implements Serializable {
     private int id;
     private Product product;
     private int quantity;
+    private String name;
     
     public CartItem() {}
     
@@ -14,12 +15,22 @@ public class CartItem implements Serializable {
         this.quantity = quantity;
     }
     
+    
+    
     public int getId() {
         return id;
     }
     
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
     
     public Product getProduct() {

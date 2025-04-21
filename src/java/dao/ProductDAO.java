@@ -97,13 +97,19 @@ public class ProductDAO {
 }
     public List<Product> getProductsByPromotion(int promoId) {
     List<Product> products = new ArrayList<>();
-    String sql = "SELECT p.* FROM APP.PRODUCTS p " +
+    String sql = "SELECT p.*, promo.DISCOUNT_VALUE " +
+                 "FROM APP.PRODUCTS p " +
+                 "JOIN APP.PROMOTION_PRODUCT pp ON p.PRODUCT_ID = pp.PRODUCT_ID " +
+                 "JOIN APP.PROMOTION promo ON pp.PROMO_ID = promo.PROMOTION_ID " + 
+                 "WHERE promo.PROMOTION_ID = ? ";
+
+    /*"SELECT p.* FROM APP.PRODUCTS p " +
              "JOIN APP.PROMOTION_PRODUCT pp ON p.PRODUCT_ID = pp.PRODUCT_ID " +
              "WHERE pp.PROMO_ID = ?";
-
+    */
     try (Connection conn = DriverManager.getConnection(host, user, password);
          PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        
         stmt.setInt(1, promoId);
         ResultSet rs = stmt.executeQuery();
 
@@ -112,6 +118,7 @@ public class ProductDAO {
             product.setId(rs.getInt("PRODUCT_ID"));
             product.setName(rs.getString("PRODUCTNAME"));
             product.setPrice(rs.getDouble("PRICE"));
+            product.setDiscount(rs.getDouble("DISCOUNT_VALUE"));
             product.setImageUrl(rs.getString("IMAGE_URL"));
             products.add(product);
         }
@@ -149,6 +156,7 @@ public class ProductDAO {
             System.out.println("Name: " + p.getName());
             System.out.println("Price: " + p.getPrice());
             System.out.println("Image url " + p.getImageUrl());
+            System.out.println("Discount value" + p.getDiscount());
 }
     
       

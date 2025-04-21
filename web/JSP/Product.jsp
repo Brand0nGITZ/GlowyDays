@@ -14,7 +14,7 @@
         <div id="productAddedMessage" class="product-added-message">
             Product added to cart!
         </div>
-
+            <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>
         <div class="outer-container">
             <div class="inner-container">
                 <div class="cart-container">

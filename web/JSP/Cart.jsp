@@ -49,7 +49,7 @@
                                     <td>RM <%= String.format("%,.2f", item.getProduct().getPrice()) %></td>
                                     <td>
                                         <form action="<%= request.getContextPath() %>/UpdateCartServlet" method="POST" class="quantity-form">
-                                            <input type="hidden" name="productId" value="<%= item.getProduct().getId() %>">
+                                            <input type="hidden" name="PRODUCTNAME" value="<%= item.getProduct().getName() %>">
                                             <input type="number" name="quantity" value="<%= item.getQuantity() %>" min="1" max="10" class="quantity-input">
                                             <button type="submit" class="update-btn">Update</button>
                                         </form>

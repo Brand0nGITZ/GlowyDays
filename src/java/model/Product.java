@@ -12,11 +12,12 @@ public class Product implements Serializable {
     private String imageUrl; // 
     private String createdAt;
     private String updatedAt;
+    private double discount;
 
     // Constructors
     public Product() {}
 
-    public Product(int id, String name, double price, String description, String category, int stock, String imageUrl, String createdAt, String updatedAt) {
+    public Product(int id, String name, double price, String description, String category, int stock, String imageUrl, String createdAt, String updatedAt, double discount) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -26,6 +27,7 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.discount = discount;
     }
 
     // Getters and Setters
@@ -66,6 +68,11 @@ public class Product implements Serializable {
         return updatedAt;
     }
     
-    
-    
+    public double getDiscount() {
+    return discount;
+}
+
+public void setDiscount(double discount) {
+    this.discount = discount;
+}
 }

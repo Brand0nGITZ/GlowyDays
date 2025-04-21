@@ -1,4 +1,3 @@
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -38,10 +37,19 @@ public class CartServlet extends HttpServlet {
         product.setName(productName);
         product.setPrice(price);
         
+        // Add image URL to the product (we'll get this from a hidden field in the form)
+        String imageUrl = request.getParameter("IMAGE_URL");
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            product.setImageUrl(imageUrl);
+        } else {
+            // Default image if not provided
+            product.setImageUrl("default.jpg");
+        }
+        
         // Check if product already exists in cart
         boolean found = false;
         for (CartItem item : cart) {
-            if (item.getProduct().getId() == productId) {
+            if (item.getProduct().getName().equals(productName))  {
                 item.setQuantity(item.getQuantity() + 1);
                 found = true;
                 break;

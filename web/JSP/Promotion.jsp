@@ -12,6 +12,7 @@
     <div class="outer-container">
             <div class="inner-container">
                 <div class="cart-container">
+                     <a href="<%= request.getContextPath() %>/ProductServlet">Products</a>
                     <a href="<%= request.getContextPath() %>/CartServlet">
                         <img src="<%= request.getContextPath() %>/ICON/cart.svg" alt="Cart" width="45" height="45">
                         <%
@@ -30,19 +31,24 @@
             for (Product product : products) {
     %>
                 <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-                    <h3><%= product.getName() %></h3>
+                    <h3><%= product.getName() %> (PROMO)</h3>
                     <img src="<%= request.getContextPath() %>/ProductImages/<%= product.getImageUrl() %>" alt="<%= product.getName() %>" width="300">
                     
                      <form action="<%= request.getContextPath() %>/CartServlet" method="POST">
             <input type="hidden" name="PRODUCT_ID" value="<%= product.getId() %>" />
-            <input type="hidden" name="PRODUCTNAME" value="<%= product.getName() %>" />
+            <input type="hidden" name="PRODUCTNAME" value="<%= product.getName() + " (PROMO)" %>" />
+
             
-            <input type="hidden" name="PRICE" value="<%= product.getPrice() %>" />
+            <%
+                double discountedPrice = product.getPrice() * (1 - product.getDiscount());
+            %>
+<input type="hidden" name="PRICE" value="<%= String.format("%.2f", discountedPrice) %>" />
             <button type="submit">Add to Cart</button>
         </form>
                     <p>Original Price: RM <%= product.getPrice() %></p>
                     <%
-                        double discounted = product.getPrice() * 0.8; // 20% discount
+                        double discounted = product.getPrice() * (1 - product.getDiscount());
+
                     %>
                     <p style="color:red;">Promo Price: RM <%= String.format("%.2f", discounted) %></p>
                 </div>
