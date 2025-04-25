@@ -257,8 +257,5 @@ public List<Product> searchProductByName(String name) {
         System.out.println("No products found by name.");
     }
 }
-    
-    
-    
         }
 
