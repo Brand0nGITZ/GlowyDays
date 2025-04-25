@@ -36,6 +36,7 @@
                     
                      <form action="<%= request.getContextPath() %>/CartServlet" method="POST">
             <input type="hidden" name="PRODUCT_ID" value="<%= product.getId() %>" />
+            <input type="hidden" name="IMAGE_URL" value="<%= product.getImageUrl() %>" />
             <input type="hidden" name="PRODUCTNAME" value="<%= product.getName() + " (PROMO)" %>" />
 
             

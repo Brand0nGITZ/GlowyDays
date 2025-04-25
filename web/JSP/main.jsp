@@ -29,6 +29,10 @@
                             <a href="#">Men's Care</a>
                             <a href="#">Sets & Gifts</a>
                         </div>
+                            
+                            
+                            
+                            
                     </div>
                     <a href="">About Us</a>               
                     <a href="">Contact Us</a>                             
@@ -112,7 +116,7 @@
                 
                 <a href="#" class="box">
                     <img class="img" src="../Category/Category_ExfoliatingToner.png">
-                    <h3>ExfoliatingToner</h3>
+                    <h3>Exfoliating Toner</h3>
                 </a>
                 
                 <a href="#" class="box">

@@ -24,6 +24,14 @@
         <servlet-name>PromotionProductsServlet</servlet-name>
         <servlet-class>PromotionProductsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchSuggestionsServlet</servlet-name>
+        <servlet-class>SearchSuggestionsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <servlet-class>SearchProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
@@ -47,5 +55,13 @@
     <servlet-mapping>
         <servlet-name>PromotionProductsServlet</servlet-name>
         <url-pattern>/PromotionProductsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchSuggestionsServlet</servlet-name>
+        <url-pattern>/SearchSuggestionsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <url-pattern>/SearchProductServlet</url-pattern>
     </servlet-mapping>
 </web-app>

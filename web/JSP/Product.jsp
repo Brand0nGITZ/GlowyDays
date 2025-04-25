@@ -10,14 +10,20 @@
         <title>Product</title>
         
     </head>
+    
+    <form action="<%= request.getContextPath() %>/SearchProductServlet" method="get">
+    <input type="text" name="query" placeholder="Search by ID or Name">
+    <button type="submit">Search</button>
+</form>
     <body> 
         <div id="productAddedMessage" class="product-added-message">
             Product added to cart!
         </div>
-            <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>
+            
         <div class="outer-container">
             <div class="inner-container">
                 <div class="cart-container">
+                    <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>
                     <a href="<%= request.getContextPath() %>/CartServlet">
                         <img src="<%= request.getContextPath() %>/ICON/cart.svg" alt="Cart" width="45" height="45">
                         <%
@@ -29,7 +35,27 @@
                             }
                         %>
                     </a>
+                    
                 </div>
+                    
+                   
+                <%
+    Integer currentPage = (Integer) request.getAttribute("currentPage");
+    Integer totalPages = (Integer) request.getAttribute("totalPages");
+
+         if (currentPage != null && totalPages != null) {
+                %>
+    <div class="pagination">
+        <% for (int i = 1; i <= totalPages; i++) { %>
+            <a href="ProductServlet?page=<%= i %>" 
+               class="<%= (i == currentPage) ? "active" : "" %>">
+                <%= i %>
+            </a>
+        <% } %>
+    </div>
+<%
+    }
+%>
 
                 <section class="products">
                     <%
@@ -51,6 +77,7 @@
                                 <input type="hidden" name="PRODUCT_ID" value="<%= p.getId() %>" /> 
                                 <input type="hidden" name="PRODUCTNAME" value="<%= p.getName() %>" />
                                 <input type="hidden" name="PRICE" value="<%= p.getPrice() %>" />
+                                <input type="hidden" name="IMAGE_URL" value="<%= p.getImageUrl() %>" />
                                 <button type="submit" class="add-to-cart-btn">Add to cart</button>
                             </form>
                         </article>
@@ -78,7 +105,7 @@
 
                         // Show the message
                         message.style.display = 'block';
-
+ 
                         // Hide the message after 3 seconds
                         setTimeout(function() {
                             message.style.display = 'none';

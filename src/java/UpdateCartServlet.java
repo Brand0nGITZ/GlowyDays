@@ -20,11 +20,11 @@ public class UpdateCartServlet extends HttpServlet {
         
         if (cart != null) {
            
+            int productId = Integer.parseInt(request.getParameter("productId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            String productName = request.getParameter("PRODUCTNAME");
             
             for (CartItem item : cart) {
-                if (item.getProduct().getName().equals(productName)) {
+                if (item.getProduct().getId() == productId) {
                     item.setQuantity(quantity);
                     break;
                 }

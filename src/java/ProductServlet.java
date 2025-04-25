@@ -25,18 +25,30 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        int page = 1;
+        int recordsPerPage = 4;
+        
+        if (request.getParameter("page") != null) {
+             page = Integer.parseInt(request.getParameter("page"));
+            }
 
         ProductDAO productDAO = new ProductDAO();
-        List<Product> productList = productDAO.getAllProducts();
-
-        // Debugging output (this is fine)
+        List<Product> products = productDAO.getProductsPaginated((page - 1) * recordsPerPage, recordsPerPage);
+        int totalRecords = productDAO.getTotalProductCount();
+        int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
+        
+        /* Debugging Purposes 
         System.out.println("Product list size: " + productList.size());
         for (Product p : productList) {
             System.out.println(p.getName() + " - " + p.getPrice());
         }
+        */
 
         // Send product list to JSP
-        request.setAttribute("products", productList);
+        request.setAttribute("products", products);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
 
         // Forward to the JSP
         RequestDispatcher rd = request.getRequestDispatcher("/JSP/Product.jsp");
