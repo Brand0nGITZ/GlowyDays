@@ -31,3 +31,44 @@ body {
 .header-right a {
     margin-left: 20px; 
 }
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-container img {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    width: 200px; 
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-menu a:hover {
+    background-color: rgb(253, 253, 214);
+}
+
+.avatar-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu p {
+    pointer-events: none;
+    margin: 0;
+}

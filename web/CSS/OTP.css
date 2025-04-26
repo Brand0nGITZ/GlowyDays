@@ -1,0 +1,349 @@
+/* Base styles */
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  transition: all .2s linear;
+}
+
+/* Apply capitalization selectively */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar a,
+.box h3 {
+  text-transform: capitalize;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+section {
+  padding: 3rem 9%;
+}
+
+/* Header styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 9%;
+  background-color: #f9e075;
+}
+
+.header .navbar a {
+  margin: 0 1.5rem;
+  font-size: 1.7rem;
+  font-weight: bolder;
+  color: #222;
+}
+
+.header .navbar a:hover {
+  color: #fca510;
+}
+
+.header .icons div,
+.header .icons a,
+.header .icons i {
+  height: 4.5rem;
+  width: 4.5rem;
+  line-height: 4.5rem;
+  border-radius: .5rem;
+  background: #eee;
+  font-size: 1.7rem;
+  color: #222;
+  margin-left: .3rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.header .icons a:hover,
+.header .icons div:hover,
+.header .icons i:hover {
+  background: #f9e075;
+  color: #fff;
+}
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#search-box {
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  width: 220px;
+  padding: 0.8rem 1rem;
+  border-radius: 2rem;
+  border: 1.5px solid #f9e075;
+  background-color: #fff;
+  font-size: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+}
+
+#search-box.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* OTP page styles */
+body {
+  background: linear-gradient(0deg, rgba(249, 224, 117, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  padding-top: 8rem; /* Space for fixed header */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* This ensures proper stacking of elements */
+}
+
+/* OTP container */
+.otp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 8rem - 30rem); /* Adjust for header and footer */
+  padding: 4rem 2rem;
+}
+
+/* OTP card */
+.otp-card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 40rem;
+  padding: 4rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+/* OTP title */
+.otp-title {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Lock icon */
+.lock-icon {
+  margin: 2rem 0;
+}
+
+.lock-icon img {
+  width: 6rem;
+  height: 6rem;
+}
+
+/* Success and info messages */
+.success-message,
+.info-message {
+  font-size: 1.6rem;
+  color: #666;
+  margin: 2rem 0;
+  text-transform: none;
+}
+
+.success-message {
+  color: #28a745;
+}
+
+/* OTP form */
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+/* Input group */
+.input-group {
+  position: relative;
+  width: 60%;
+  max-width: 30rem;
+  margin: 0 auto 3rem;
+  right: 25px;
+}
+
+
+.input-group input {
+  width: 100%;
+  padding: 1.2rem 1.5rem 1.2rem 4.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  transition: border-color 0.3s;
+  text-transform: none;
+}
+
+.input-group input:focus {
+  border-color: #fca510;
+  outline: none;
+}
+
+/* Reset button */
+.reset-btn {
+  width: 50%;
+  max-width: 30rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f9e075 0%, #fca510 100%);
+  color: #222;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  text-transform: none;
+}
+
+.reset-btn:hover {
+  opacity: 0.9;
+}
+
+/* Footer styles */
+.footer {
+  background: #f2f2f2;
+  padding: 4rem 5%;
+  margin-top: auto; /* This pushes the footer to the bottom */
+  width: 100%;
+  clear: both; /* Ensures footer clears any floated elements */
+}
+
+.footer .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+}
+
+.footer .box h3 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.footer .box a {
+  display: block;
+  font-size: 1.4rem;
+  color: #666;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  text-transform: none;
+}
+
+.footer .box a i {
+  color: #f9e075;
+  margin-right: 0.5rem;
+}
+
+.footer .box a:hover {
+  color: #f9e075;
+}
+
+.footer .box a:hover i {
+  padding-right: 1rem;
+}
+
+.footer .box .share {
+  margin-top: 1.5rem;
+}
+
+.footer .box .share a {
+  display: inline-block;
+  height: 4rem;
+  width: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  font-size: 1.6rem;
+  background: #eee;
+  color: #222;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
+  transition: 0.3s;
+}
+
+.footer .box .share a:hover {
+  background: #f9e075;
+  color: #fff;
+}
+
+.footer .box p {
+  font-size: 1.4rem;
+  color: #555;
+  margin: 0.5rem 0;
+  text-transform: none;
+}
+
+/* Newsletter style for footer */
+.footer .box .email {
+  width: 70%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin: 0;
+  font-size: 1.4rem;
+  text-transform: none;
+  border-radius: 0.5rem 0 0 0.5rem;
+  float: left;
+}
+
+.footer .box .btn {
+  width: 30%;
+  padding: 1rem 0;
+  background: #f9e075;
+  color: #222;
+  font-size: 1.4rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-transform: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+  float: left;
+}
+
+/* Clear float after the newsletter form */
+.footer .box form::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+
+  section {
+    padding: 3rem 5%;
+  }
+
+  .otp-card {
+    padding: 3rem 2rem;
+    margin: 2rem 1rem;
+  }
+
+  .header {
+    padding: 1.5rem 5%;
+  }
+}

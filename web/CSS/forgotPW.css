@@ -1,0 +1,406 @@
+/* Base styles */
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    transition: all .2s linear;
+}
+
+/* Apply capitalization selectively */
+h1, h2, h3, h4, h5, h6,
+.navbar a,
+.box h3 {
+    text-transform: capitalize;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 3rem 9%;
+}
+
+/* Header styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 9%;
+    background-color: #F9E075;
+}
+
+.header .navbar a {
+    margin: 0 1.5rem;
+    font-size: 1.7rem;
+    font-weight: bolder;
+    color: #222;
+}
+
+.header .navbar a:hover {
+    color: #FCA510;
+}
+
+.header .icons div,
+.header .icons a,
+.header .icons i {
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    font-size: 1.7rem;
+    color: #222;
+    margin-left: .3rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header .icons a:hover,
+.header .icons div:hover,
+.header .icons i:hover {
+    background: #F9E075;
+    color: #fff;
+}
+
+.search-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#search-box {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    width: 220px;
+    padding: 0.8rem 1rem;
+    border-radius: 2rem;
+    border: 1.5px solid #F9E075;
+    background-color: #fff;
+    font-size: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+}
+
+#search-box.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Forgot Password page styles */
+body {
+    background: linear-gradient(0deg, rgba(249, 224, 117, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    padding-top: 8rem; /* Space for fixed header */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* This ensures proper stacking of elements */
+}
+
+/* Forgot Password container */
+.forgot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 8rem - 30rem); /* Adjust for header and footer */
+    padding: 4rem 2rem;
+}
+
+/* Forgot Password card */
+.forgot-card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 50rem;
+    padding: 4rem;
+    margin: 2rem 0;
+}
+
+/* Forgot Password title */
+.forgot-title {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.forgot-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 10rem;
+    height: 0.3rem;
+    background: linear-gradient(135deg, #F9E075 0%, #FCA510 100%);
+}
+
+/* Forgot Password subtitle */
+.forgot-subtitle {
+    font-size: 1.6rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    text-transform: none;
+}
+
+/* Instructions */
+.instructions {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.instructions ol {
+    padding-left: 2rem;
+}
+
+.instructions li {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 1rem;
+    text-transform: none;
+}
+
+/* Form styles */
+.forgot-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    text-transform: none;
+}
+
+.form-group input {
+    padding: 1.2rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    transition: border-color 0.3s;
+    text-transform: none;
+}
+
+.form-group input:focus {
+    border-color: #FCA510;
+    outline: none;
+}
+
+/* Validation message */
+.validation-message {
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    min-height: 2rem;
+    text-transform: none;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+    }
+}
+
+/* Back button */
+.back-btn {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    color: #333;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-btn i {
+    margin-right: 0.5rem;
+}
+
+.back-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Submit button */
+.submit-btn {
+    flex: 1;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #F9E075 0%, #FCA510 100%);
+    color: #222;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    text-transform: none;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Footer styles */
+.footer {
+    background: #f2f2f2;
+    padding: 4rem 5%;
+    margin-top: auto; /* This pushes the footer to the bottom */
+    width: 100%;
+    clear: both; /* Ensures footer clears any floated elements */
+}
+
+.footer .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+}
+
+.footer .box h3 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.footer .box a {
+    display: block;
+    font-size: 1.4rem;
+    color: #666;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.footer .box a i {
+    color: #F9E075;
+    margin-right: 0.5rem;
+}
+
+.footer .box a:hover {
+    color: #F9E075;
+}
+
+.footer .box a:hover i {
+    padding-right: 1rem;
+}
+
+.footer .box .share {
+    margin-top: 1.5rem;
+}
+
+.footer .box .share a {
+    display: inline-block;
+    height: 4rem;
+    width: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    font-size: 1.6rem;
+    background: #eee;
+    color: #222;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    transition: 0.3s;
+}
+
+.footer .box .share a:hover {
+    background: #F9E075;
+    color: #fff;
+}
+
+.footer .box p {
+    font-size: 1.4rem;
+    color: #555;
+    margin: 0.5rem 0;
+    text-transform: none;
+}
+
+.footer .box .email {
+    width: 50%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    margin: 1rem 0;
+    font-size: 1.4rem;
+    text-transform: none;
+}
+
+.footer .box .btn {
+    padding: 1rem 2rem;
+    background: #F9E075;
+    color: #222;
+    font-size: 1.4rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-transform: none;
+    display: grid;
+}
+
+.footer .box .btn:hover {
+    background: #F9E075;
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    html {
+        font-size: 55%;
+    }
+    
+    section {
+        padding: 3rem 5%;
+    }
+    
+    .forgot-card {
+        padding: 3rem 2rem;
+        margin: 2rem 1rem;
+    }
+    
+    .header {
+        padding: 1.5rem 5%;
+    }
+}

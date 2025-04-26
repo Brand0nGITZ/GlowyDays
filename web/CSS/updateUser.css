@@ -1,0 +1,62 @@
+#details{
+    border-radius: 15px;
+    background-color: white;
+    margin-top: 150px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+h1{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.label{
+    float: left;
+    width: 25%;
+    margin-top: 18px;
+}
+
+.label label {
+    font-size: 20px; 
+}
+
+.input{
+    float: left;
+    width: 75%;
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+
+input[type=text], input[type=email], input[type=tel], input[type=password], input[type=date] {
+  width: 90%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+fieldset {
+    border: 0;
+    margin-bottom: 7px;
+}
+
+button[type=submit]{
+    background-color: rgb(253, 253, 214);
+    color: black;
+    font-size: 15px;
+    padding: 12px 20px;
+    border: none;
+    float:right;
+    margin-bottom: 20px;
+    border-radius:10px;
+}
+
+button[type=submit]:hover{
+    background-color: black;
+    color: rgb(253, 253, 214);
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
