@@ -24,6 +24,8 @@ public class CartServlet extends HttpServlet {
         if (cart == null) {
             cart = new ArrayList<>();
             session.setAttribute("cart", cart);
+            // cart.generateCartID() 
+            
         }
         
         // Get product info from form

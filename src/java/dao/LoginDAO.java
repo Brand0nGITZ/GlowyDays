@@ -24,10 +24,23 @@ public class LoginDAO {
 
             if (rs.next()) {
                 isLogin = true;
-                String username = rs.getString("username");  // 从数据库取出 username
+                String userID = rs.getString("user_id");
+                String username = rs.getString("username"); 
+                String name = rs.getString("name");
+                Date birth = rs.getDate("birth");
+                String email = rs.getString("email");
+                String mobileNo = rs.getString("mobileNo");// 从数据库取出 username
 
                 HttpSession session = request.getSession();
+                session.setAttribute("user_id", userID);
                 session.setAttribute("username", username);
+                session.setAttribute("name", name);
+                session.setAttribute("birth", birth != null ? birth.toString() : null);
+                session.setAttribute("email", email);
+                session.setAttribute("mobileNo", mobileNo);
+                
+                
+                
             }
 
             rs.close();

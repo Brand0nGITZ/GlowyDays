@@ -20,6 +20,7 @@
                     <%
                         Long userID = (Long) session.getAttribute("userID");
                         String username = (String) session.getAttribute("username");
+                        
                     %>
                     <a style="pointer-events: none;">Username: <%= username %></a>
                     <a href="../JSP/UserProfile.jsp">User Profile</a>

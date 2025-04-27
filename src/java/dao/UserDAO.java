@@ -14,7 +14,7 @@ public class UserDAO {
 
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Client", "nbuser", "nbuser");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
 
             String sql = "INSERT INTO APP.\"USER\" (\"name\", \"username\", \"birth\", \"email\", \"mobileNo\", \"password\", \"role\") VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class UserDAO {
     List<User> staffList = new ArrayList<>();
     try {
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Client", "nbuser", "nbuser");
+        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
 
         String sql = "SELECT * FROM APP.\"USER\" WHERE \"role\" = ?";
         PreparedStatement pst = con.prepareStatement(sql);

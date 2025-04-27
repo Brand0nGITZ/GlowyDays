@@ -15,6 +15,7 @@ import java.util.List;
 import dao.ProductDAO;
 import jakarta.servlet.RequestDispatcher;
 import model.Product;
+import dao.LoginDAO;
 /**@
  *
  * @author yapji
@@ -49,6 +50,7 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
+      
 
         // Forward to the JSP
         RequestDispatcher rd = request.getRequestDispatcher("/JSP/Product.jsp");
