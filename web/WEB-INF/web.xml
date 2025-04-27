@@ -49,10 +49,6 @@
         <servlet-class>CheckName</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CheckOut</servlet-name>
-        <servlet-class>CheckOut</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CheckPassword</servlet-name>
         <servlet-class>CheckPassword</servlet-class>
     </servlet>
@@ -124,6 +120,30 @@
         <servlet-name>ValidateOtp</servlet-name>
         <servlet-class>ValidateOtp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadCartServlet</servlet-name>
+        <servlet-class>LoadCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentShippingServlet</servlet-name>
+        <servlet-class>PaymentShippingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidateShippingServlet</servlet-name>
+        <servlet-class>ValidateShippingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidatePaymentServlet</servlet-name>
+        <servlet-class>ValidatePaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckoutReviewServlet</servlet-name>
+        <servlet-class>CheckoutReviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
@@ -171,10 +191,6 @@
     <servlet-mapping>
         <servlet-name>CheckName</servlet-name>
         <url-pattern>/CheckName</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CheckOut</servlet-name>
-        <url-pattern>/CheckOut</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckPassword</servlet-name>
@@ -247,5 +263,29 @@
     <servlet-mapping>
         <servlet-name>ValidateOtp</servlet-name>
         <url-pattern>/ValidateOtp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCartServlet</servlet-name>
+        <url-pattern>/LoadCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentShippingServlet</servlet-name>
+        <url-pattern>/PaymentShippingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidateShippingServlet</servlet-name>
+        <url-pattern>/ValidateShippingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidatePaymentServlet</servlet-name>
+        <url-pattern>/ValidatePaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutReviewServlet</servlet-name>
+        <url-pattern>/CheckoutReviewServlet</url-pattern>
     </servlet-mapping>
 </web-app>

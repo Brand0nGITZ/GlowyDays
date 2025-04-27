@@ -88,7 +88,7 @@ public class LoginDAO {
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
 
-        String sql = "SELECT * FROM APP\"USER\" WHERE \"email\" = ? AND \"password\" = ?";
+        String sql = "SELECT * FROM APP.\"USER\" WHERE \"email\" = ? AND \"password\" = ?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, login.getEmail());
         pst.setString(2, login.getPassword());
@@ -124,7 +124,7 @@ public class LoginDAO {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
 
-            String sql = "INSERT INTO \"USER\" (\"name\", \"username\", \"birth\", \"email\", \"mobileNo\", \"password\", \"role\") VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO APP.\"USER\" (\"name\", \"username\", \"birth\", \"email\", \"mobileNo\", \"password\", \"role\") VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, user.getName());
             pst.setString(2, user.getUsername());
@@ -159,7 +159,7 @@ public class LoginDAO {
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
 
-        String sql = "SELECT * FROM \"USER\" WHERE \"email\" = ?";
+        String sql = "SELECT * FROM APP.\"USER\" WHERE \"email\" = ?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, email);
 

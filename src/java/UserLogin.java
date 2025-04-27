@@ -36,13 +36,13 @@ public class UserLogin extends HttpServlet {
 
                 switch (role) {
                     case "manager":
-                        response.sendRedirect("/JSP/AdminPanel.jsp");
+                       response.sendRedirect(request.getContextPath() + "/JSP/AdminPanel.jsp");
                         break;
                     case "staff":
-                        response.sendRedirect("/JSP/StaffPanel.jsp");
+                        response.sendRedirect(request.getContextPath() + "/JSP/StaffPanel.jsp");
                         break;
                     default:
-                        response.sendRedirect("/JSP/UserHome.jsp");
+                       response.sendRedirect(request.getContextPath() + "/JSP/UserHome.jsp");
                         break;
                 }
             } else {

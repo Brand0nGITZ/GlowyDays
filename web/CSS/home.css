@@ -8,6 +8,7 @@
     text-decoration: none;
     outline: none;
     border: none;
+    text-transform: capitalize;
     transition: all .2s linear;
 }
 
@@ -74,54 +75,6 @@ section{
     color: #fff;   
 }
 
-/* Positioning for the dropdown */
-.dropdown {
-    position: relative;
-    display: inline-block;
-    align-items: center;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    position: absolute;
-    top: 100%;
-    right: -50px;
-    background-color: #F9E075;
-    min-width: 180px;
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease-in-out;
-    z-index: 999;
-    align-content: center;
-}
-
-/* Dropdown links */
-.dropdown-content a {
-    display: block;
-    padding: 1rem 1.5rem;
-    color: #222;
-    font-size: 1.5rem;
-    font-weight: 500;
-    text-decoration: none;
-    align-items: center;
-    text-align: center;
-}
-
-.dropdown-content a:hover {
-    background-color: #ffeb9d;
-    color: white;
-    transform: scale(1.05);
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
 .search-wrapper {
     position: relative;
     display: inline-block;
@@ -148,6 +101,39 @@ section{
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 45px;
+    left: -10px;
+    z-index: 1000;
+}
+
+.avatar-container .dropdown-menu a {
+    /* 这样写就只影响avatar那边的下拉menu */
+    display: block;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    width: 180px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container .dropdown-menu a:hover {
+    background-color: #F9E075;
+    color: black;
+}
+
+.avatar-container:hover .dropdown-menu {
+    display: block;
 }
 
 .title{

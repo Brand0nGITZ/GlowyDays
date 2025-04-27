@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title><%= p.getName() %> Details</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductDetails.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductDetails.css?v=3">
 </head>
 <body>
     <div class="product-detail-container">

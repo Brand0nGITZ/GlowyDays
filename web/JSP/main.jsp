@@ -241,6 +241,6 @@
         </div>
      </section>
   
-    <script src="../JavaScript/main.js"></script>
+    <script src="../Javascript/main.js"></script>
 
 </html>

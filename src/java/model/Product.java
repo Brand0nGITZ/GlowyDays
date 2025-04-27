@@ -13,6 +13,7 @@ public class Product implements Serializable {
     private String createdAt;
     private String updatedAt;
     private double discount;
+    private int quantity = 1;
 
     // Constructors
     public Product() {}
@@ -51,6 +52,14 @@ public class Product implements Serializable {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    
+     public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
     
     public void setCreatedAt (String createdAt) {
         this.createdAt = createdAt;

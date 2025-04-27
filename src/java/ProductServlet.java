@@ -6,7 +6,6 @@
 import jakarta.servlet.annotation.WebServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,17 +14,28 @@ import java.util.List;
 import dao.ProductDAO;
 import jakarta.servlet.RequestDispatcher;
 import model.Product;
-import dao.LoginDAO;
+import dao.CartDAO;
+import model.CartItem;
 /**@
  *
  * @author yapji
  */
 @WebServlet("/ProductServlet" )
 public class ProductServlet extends HttpServlet {
-
+    
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String userID = (String) request.getSession().getAttribute("user_id");
+        
+        if (userID == null) {
+            // If user is not logged in, maybe redirect to login page or show message
+            response.sendRedirect("Login.jsp");
+            return; // Stop further processing
+        }
+        
         
         int page = 1;
         int recordsPerPage = 4;
@@ -39,6 +49,15 @@ public class ProductServlet extends HttpServlet {
         int totalRecords = productDAO.getTotalProductCount();
         int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
         
+        
+        CartDAO cartDAO = new CartDAO();
+          int userId = Integer.parseInt(userID); 
+        List<CartItem> cartItems = cartDAO.getCartItems(userId);
+
+        
+        
+        
+        
         /* Debugging Purposes 
         System.out.println("Product list size: " + productList.size());
         for (Product p : productList) {
@@ -50,6 +69,8 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("cartItems", cartItems); // Make sure to pass cartItems too
+        request.setAttribute("userID", userID);
       
 
         // Forward to the JSP

@@ -1,0 +1,531 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #0c8a56; /* Hari Raya green */
+  --secondary-color: #d4af37; /* Gold */
+  --accent-color: #f8f0e3; /* Cream */
+  --text-color: #333;
+  --white: #fff;
+  --light-green: #e0f5ee;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  text-decoration: none;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--text-color);
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%230c8a56" opacity="0.1"/><circle cx="0" cy="0" r="2" fill="%230c8a56" opacity="0.1"/><circle cx="0" cy="100" r="2" fill="%230c8a56" opacity="0.1"/><circle cx="100" cy="0" r="2" fill="%230c8a56" opacity="0.1"/><circle cx="100" cy="100" r="2" fill="%230c8a56" opacity="0.1"/></svg>');
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 5%;
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--primary-color);
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  left: 0;
+  bottom: -5px;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+  width: 100%;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.icons a,
+.icons i {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icons a:hover,
+.icons i:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#search-box {
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 200px;
+}
+
+#search-box:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(12, 138, 86, 0.3);
+}
+
+#search-icon {
+  position: absolute;
+  left: 10px;
+  color: #777;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hari Raya Banner */
+.hari-raya-banner {
+  background: linear-gradient(135deg, var(--primary-color), #085a38);
+  color: var(--white);
+  padding: 3rem 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.hari-raya-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 15 L55 30 L70 30 L60 40 L65 55 L50 45 L35 55 L40 40 L30 30 L45 30 Z" fill="%23d4af37" opacity="0.2"/></svg>');
+  opacity: 0.3;
+}
+
+.hari-raya-banner h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hari-raya-banner p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+
+.ketupat-decoration {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  opacity: 0.2;
+}
+
+.ketupat-1 {
+  top: 10%;
+  left: 5%;
+  transform: rotate(15deg);
+}
+
+.ketupat-2 {
+  bottom: 15%;
+  right: 8%;
+  transform: rotate(-10deg);
+}
+
+/* Main Content */
+.outer-container {
+  padding: 2rem 5%;
+}
+
+.outer-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.outer-container h2::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 3px;
+  background: var(--secondary-color);
+  left: 15%;
+  bottom: -10px;
+  border-radius: 5px;
+}
+
+.inner-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Product Cards */
+.product-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.promo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.product-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain; /* Changed from 'cover' to 'contain' to show the entire image */
+  background-color: #f9f5f0; /* Light beige background to match your product images */
+  border-radius: 10px 10px 0 0;
+  transition: transform 0.5s ease;
+  padding: 1rem;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Adjust product info padding for better spacing */
+.product-info {
+  padding: 1.5rem;
+  background-color: white;
+}
+
+/* Make product info take remaining space */
+.product-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: var(--primary-color);
+}
+
+.products-container {
+  margin-top: 2rem;
+}
+
+/* Update the price-container to display vertically */
+.price-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.promo-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e63946;
+  margin: 0;
+}
+
+.discount-tag {
+  background-color: #e63946;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+}
+
+/* Push the button to the bottom */
+.product-info form {
+  margin-top: auto;
+}
+
+.product-card button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-card button:hover {
+  background-color: #096b43;
+  transform: translateY(-2px);
+}
+
+/* Hari Raya Decorative Elements */
+.decoration {
+  position: fixed;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.moon {
+  top: 15%;
+  left: 5%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  box-shadow: 0 0 20px var(--secondary-color);
+}
+
+.star {
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-bottom: 7px solid var(--secondary-color);
+  border-left: 10px solid transparent;
+  transform: rotate(35deg);
+  position: absolute;
+}
+
+.star:before {
+  border-bottom: 8px solid var(--secondary-color);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -5px;
+  left: -6px;
+  content: "";
+  transform: rotate(-35deg);
+}
+
+.star:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 0;
+  left: -10px;
+  border-right: 10px solid transparent;
+  border-bottom: 7px solid var(--secondary-color);
+  border-left: 10px solid transparent;
+  transform: rotate(-70deg);
+}
+
+.star-1 {
+  top: 20%;
+  right: 10%;
+  transform: scale(2) rotate(35deg);
+}
+
+.star-2 {
+  bottom: 15%;
+  left: 15%;
+  transform: scale(1.5) rotate(35deg);
+}
+
+.star-3 {
+  top: 40%;
+  right: 20%;
+  transform: scale(1.8) rotate(35deg);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--light-green);
+  border-radius: 10px;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 3rem 5%;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-section h3::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  background: var(--secondary-color);
+  left: 0;
+  bottom: -8px;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #e0e0e0;
+  margin-bottom: 0.8rem;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--secondary-color);
+  transform: translateX(5px);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  width: 35px;
+  height: 35px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-5px);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
