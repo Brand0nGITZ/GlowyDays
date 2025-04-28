@@ -22,7 +22,8 @@
             <a href="GuestHome.jsp">Home</a>
             <a href="Product.jsp">Product</a>
             <a href="">About Us</a>               
-            <a href="">Contact Us</a>                             
+            <a href="">Contact Us</a>   
+            
         </div>
         <div class="icons">
             <div class="search-wrapper">
