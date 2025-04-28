@@ -144,6 +144,22 @@
         <servlet-name>CheckoutReviewServlet</servlet-name>
         <servlet-class>CheckoutReviewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddTrackingServlet</servlet-name>
+        <servlet-class>.AddTrackingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailsServlet</servlet-name>
+        <servlet-class>.OrderDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>.OrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearCartServlet</servlet-name>
+        <servlet-class>ClearCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
@@ -287,5 +303,21 @@
     <servlet-mapping>
         <servlet-name>CheckoutReviewServlet</servlet-name>
         <url-pattern>/CheckoutReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTrackingServlet</servlet-name>
+        <url-pattern>/AddTrackingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailsServlet</servlet-name>
+        <url-pattern>/OrderDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearCartServlet</servlet-name>
+        <url-pattern>/ClearCartServlet</url-pattern>
     </servlet-mapping>
 </web-app>

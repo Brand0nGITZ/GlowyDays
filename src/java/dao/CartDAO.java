@@ -140,28 +140,33 @@ public class CartDAO {
         return cartItems;
     }
 
-    // Update cart item quantity
-    public boolean updateCartItem(int cartDetailsId, int quantity) {
+    public boolean updateCartItem(int userId, int productId, int quantity) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            // Establish the database connection
             conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 
-            String updateQuery = "UPDATE APP.CartDetails SET Quantity = ? WHERE CartDetailID = ?";
+            // Update query based on userId and productId
+            String updateQuery = "UPDATE APP.CartDetails SET Quantity = ? WHERE UserID = ? AND ProductID = ?";
             stmt = conn.prepareStatement(updateQuery);
-            stmt.setInt(1, quantity);
-            stmt.setInt(2, cartDetailsId);
 
+            // Set the new quantity, userId, and productId
+            stmt.setInt(1, quantity);  // New quantity
+            stmt.setInt(2, userId);    // User ID
+            stmt.setInt(3, productId); // Product ID
+
+            // Execute the update and check if rows were affected
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
 
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();  // Log any SQL exceptions
+            return false;  // Return false if the update fails
         } finally {
             try {
+                // Ensure resources are closed
                 if (stmt != null) {
                     stmt.close();
                 }
@@ -169,13 +174,13 @@ public class CartDAO {
                     conn.close();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace();  // Log any exceptions during cleanup
             }
         }
     }
 
     // Remove item from cart
-    public boolean removeCartItem(int cartDetailsId) {
+    public boolean removeCartItem(int userId, int productId) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -183,9 +188,10 @@ public class CartDAO {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 
-            String deleteQuery = "DELETE FROM APP.CartDetails WHERE CartDetailID = ?";
+            String deleteQuery = "DELETE FROM APP.CartDetails WHERE UserID = ? AND ProductID = ?";
             stmt = conn.prepareStatement(deleteQuery);
-            stmt.setInt(1, cartDetailsId);
+            stmt.setInt(1, userId);    // User ID
+            stmt.setInt(2, productId); // Product ID
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -207,8 +213,7 @@ public class CartDAO {
         }
     }
 
-    // Clear all items from a user's cart
-    public boolean clearCart(int userId) {
+     public boolean clearCart(int userId) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -227,7 +232,7 @@ public class CartDAO {
                 int cartId = rs.getInt("CartID");
 
                 // Delete all items in the cart
-                String deleteQuery = "DELETE FROM APP.CartDetails WHERE CartID = ?";
+                String deleteQuery = "DELETE FROM APP.CartDetails WHERE USERID = ?";
                 stmt = conn.prepareStatement(deleteQuery);
                 stmt.setInt(1, cartId);
                 stmt.executeUpdate();
@@ -242,15 +247,9 @@ public class CartDAO {
             return false;
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

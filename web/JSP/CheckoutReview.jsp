@@ -52,9 +52,9 @@
             <tr>
                 <td><img src="<%= p.getImageUrl() %>" alt="Product Image" style="width: 80px; height: 80px;"></td>
                 <td><%= p.getName() %></td>
-                <td>$<%= String.format("%.2f", p.getPrice()) %></td>
+                <td>RM<%= String.format("%.2f", p.getPrice()) %></td>
                 <td><%= item.getQuantity() %></td>
-                <td>$<%= String.format("%.2f", p.getPrice() * item.getQuantity()) %></td>
+                <td>RM<%= String.format("%.2f", p.getPrice() * item.getQuantity()) %></td>
             </tr>
 <%
             }
@@ -71,7 +71,7 @@
 
 <% 
     List<ShippingDetail> shippingList = (List<ShippingDetail>) session.getAttribute("shippingList");
-     ShippingDetail shippingDetail = (ShippingDetail) session.getAttribute("shippingDetail");
+   
     
     List<PaymentMethod> paymentMethods = (List<PaymentMethod>) session.getAttribute("paymentMethods");
 %>
@@ -79,32 +79,39 @@
 
 
 <!-- Shipping List -->
-<h3>Shipping Information</h3>
 
+    <%
+    // Get the ShippingDetail object from the session
+    ShippingDetail shippingDetail = (ShippingDetail) session.getAttribute("shippingDetail");
+    
+    if (shippingDetail != null) {
+%>
+
+<!-- Display Shipping Information -->
+<h3>Shipping Information</h3>
 <table>
     <tr>
-        <th>Shipping ID </th>
+        <th>Shipping ID</th>
         <th>Buyer Name</th>
         <th>Address</th>
     </tr>
-    <%
-        if (shippingList != null) {
-            for (ShippingDetail shipping : shippingList) {
-    %>
     <tr>
-        <td><%= shipping.getShippingId() %></td>
-        <td><%= shipping.getBuyer().getFullName() %></td>
+        <td><%= shippingDetail.getShippingId() %></td>
+        <td><%= shippingDetail.getBuyer().getFullName() %></td>
         <td>
-    <%= shipping.getAddress().getAddressId() %>, 
-    <%= shipping.getAddress().getCity() %>, 
-    <%= shipping.getAddress().getState() %>, 
-    <%= shipping.getAddress().getPostcode() %>
-</td>       
+            <%= shippingDetail.getAddress().getAddressId() %>, 
+            <%= shippingDetail.getAddress().getCity() %>, 
+            <%= shippingDetail.getAddress().getState() %>, 
+            <%= shippingDetail.getAddress().getPostcode() %>
+        </td>       
     </tr>
-    <%
-            }
-        }
-    %>
+</table>
+
+<%
+    } else {
+        out.println("<p>No shipping information available.</p>");
+    }
+%>
 </table>
 
 <!-- Payment Methods List -->
@@ -134,14 +141,14 @@
 
 <div class="summary">
     <h2>Payment Summary:</h2>
-    <div>Subtotal: $<%= checkoutDetail != null ? checkoutDetail.getSubtotal() : "0.00" %></div>
-    <div>Tax Amount: $<%= checkoutDetail != null ? checkoutDetail.getTaxAmount() : "0.00" %></div>
-    <div>Delivery Fee: $<%= checkoutDetail != null ? checkoutDetail.getDeliveryFee() : "0.00" %></div>
-    <div><strong>Total Amount: $<%= checkoutDetail != null ? checkoutDetail.getTotalAmount() : "0.00" %></strong></div>
+    <div>Subtotal: RM<%= checkoutDetail != null ? checkoutDetail.getSubtotal() : "0.00" %></div>
+    <div>Tax Amount: RM<%= checkoutDetail != null ? checkoutDetail.getTaxAmount() : "0.00" %></div>
+    <div>Delivery Fee: RM<%= checkoutDetail != null ? checkoutDetail.getDeliveryFee() : "0.00" %></div>
+    <div><strong>Total Amount: RM<%= checkoutDetail != null ? checkoutDetail.getTotalAmount() : "0.00" %></strong></div>
 </div>
 
-<form action="ConfirmOrderServlet" method="post">
-    <button type="submit" class="confirm-btn">Confirm Order</button>
+<form action="<%= request.getContextPath()%>/ClearCartServlet" method="POST">
+    <button type="submit" class="submitBtn">Pay Now</button>
 </form>
 
 </body>

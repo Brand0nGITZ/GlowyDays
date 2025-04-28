@@ -550,3 +550,170 @@ section{
   background: #F9E075;
   color: #fff;
 }
+
+/* About Us Page Styles */
+.about-us {
+    padding-top: 12rem;
+    padding-bottom: 5rem;
+    background-color: #fff;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Two-column layout for video and text */
+.about-flex-container {
+    display: flex;
+    gap: 5rem;
+    margin-bottom: 6rem;
+    align-items: flex-start;
+}
+
+.about-video {
+    flex: 0 0 45%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.about-video video {
+    width: 100%;
+    display: block;
+    height: auto;
+    aspect-ratio: 9/16; /* Adjust this to match your video's aspect ratio */
+    object-fit: cover;
+}
+
+.about-text {
+    flex: 0 0 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px; /* Adjust this to match your video height */
+}
+
+.story-section, .mission-section {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+}
+
+.story-section:before, .mission-section:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #F9E075;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+}
+
+.about-text p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: #666;
+}
+
+/* Rest of the content */
+.about-content {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: #222;
+    margin: 2.5rem 0 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 4px solid #F9E075;
+}
+
+.about-content p {
+    margin-bottom: 2rem;
+    text-align: justify;
+}
+
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+}
+
+.value-box {
+    background-color: #fff9e8;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.value-box i {
+    font-size: 4rem;
+    color: #F9E075;
+    margin-bottom: 1.5rem;
+}
+
+.value-box h3 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 1rem;
+}
+
+.value-box p {
+    font-size: 1.4rem;
+    color: #666;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .about-flex-container {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-us {
+        padding-top: 10rem;
+    }
+    
+    .about-flex-container {
+        flex-direction: column;
+    }
+    
+    .about-video, .about-text {
+        flex: 0 0 100%;
+    }
+    
+    .about-text {
+        min-height: auto;
+    }
+    
+    .about-text h2 {
+        font-size: 2.2rem;
+    }
+    
+    .values-container {
+        grid-template-columns: 1fr;
+    }
+}
