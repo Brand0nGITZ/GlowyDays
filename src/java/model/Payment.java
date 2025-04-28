@@ -1,35 +1,23 @@
 package model;
 
-import jakarta.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
-@Entity
-@Table(name = "PAYMENT")
 public class Payment {
 
-    @Id
-    @Column(name = "paymentId")
     private String paymentId;
-
-    @Column(name = "transactionId", nullable = false, unique = true)
-    private String transactionId;
-
-    @ManyToOne
-    @JoinColumn(name = "methodId", nullable = false)
-    private PaymentMethod method;
-
-    @Column(name = "paidDate")
+    private String methodId; 
+    private int userId;  
     private Date paidDate;
-
-    @Column(name = "paidTime")
     private Time paidTime;
 
     // Constructors
     public Payment() {}
 
-    public Payment(PaymentMethod method, Date paidDate, Time paidTime) {
-        this.method = method;
+    public Payment(String paymentId, String methodId, int userId, Date paidDate, Time paidTime) {
+        this.paymentId = paymentId;
+        this.methodId = methodId; 
+        this.userId = userId;
         this.paidDate = paidDate;
         this.paidTime = paidTime;
     }
@@ -43,13 +31,22 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public PaymentMethod getMethod() {
-        return method;
+
+    public String getMethodId() {
+        return methodId;
     }
 
-    public void setMethod(PaymentMethod method) {
-        this.method = method;
+    public void setMethodId(String methodId) {
+        this.methodId = methodId;
     }
+    
+    public int getUserId() { 
+        return userId; 
+    } 
+    
+    public void setUserId(int userId) { 
+        this.userId = userId; 
+    } 
 
     public Date getPaidDate() {
         return paidDate;

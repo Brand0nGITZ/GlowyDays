@@ -16,6 +16,8 @@ import model.Address;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import model.ShippingDetail;
 
 @WebServlet("/PaymentShippingServlet")
 public class PaymentShippingServlet extends HttpServlet {
@@ -37,26 +39,32 @@ public class PaymentShippingServlet extends HttpServlet {
             String city = request.getParameter("shippingCity");
             String state = request.getParameter("shippingState");
             String postcode = request.getParameter("shippingPostcode");
+           
 
             // 2. Get payment inputs from form
+            String methodId = request.getParameter("payment_methodId");
             String methodName = request.getParameter("payment_method");
             String cardOwner = request.getParameter("cardOwner");
             String cardNumber = request.getParameter("cardNumber");
             String expMonth = request.getParameter("expMonth");
             String expYear = request.getParameter("expYear");
             String cvv = request.getParameter("cvv");
-
+            
+                 //(String methodId, String methodName, String cardOwner, String cardNumber,
+                        // String expMonth, String expYear, String cvv, int userId)
+                // public BuyerDetail(int userId, String fullName, String email, String mobile) {
             // 3. Create model objects
-            BuyerDetail buyer = new BuyerDetail(fullName, email, mobile);
-            Address address = new Address(addressStr, city, state, postcode);
-            PaymentMethod paymentMethod = new PaymentMethod(methodName, cardOwner, cardNumber, expMonth, expYear, cvv);
+            BuyerDetail buyer = new BuyerDetail(userId, fullName, email, mobile);
+            Address address = new Address ( addressStr,  city, state, postcode);
+            PaymentMethod paymentMethod = new PaymentMethod(methodId, methodName, cardOwner, cardNumber, expMonth, expYear, cvv , userId);
 
             // 4. Save both to database
             ShippingDAO shippingDAO = new ShippingDAO();
+            String shippingId = shippingDAO.getLatestShippingId(userId); 
             PaymentDAO paymentDAO = new PaymentDAO();
-           
-            boolean shippingSaved = shippingDAO.saveShipping(buyer, address);
-            boolean paymentSaved = paymentDAO.savePayment(paymentMethod);
+          
+            boolean shippingSaved = shippingDAO.saveShipping(buyer, address , userId);
+            boolean paymentSaved = paymentDAO.savePayment(paymentMethod , userId);
             //This works
             if (!shippingSaved){
                throw new Exception("Failed to save shipping information to database");
@@ -65,8 +73,12 @@ public class PaymentShippingServlet extends HttpServlet {
             if (!paymentSaved){
                throw new Exception("Failed to save payment information to database");
            }
-            
+            // public ShippingDetail(int userId, String shippingId, BuyerDetail buyer, Address address) {
+       // this.shippingId = shippingId;
             // 5. Store in session for orderConfirmedServlet page
+            ShippingDetail shippingDetail = new ShippingDetail(userId, shippingId, buyer, address);
+            session.setAttribute("shippingDetail", shippingDetail);
+            session.setAttribute("paymentMethods", List.of(paymentMethod));
             session.setAttribute("buyer", buyer);
             session.setAttribute("address", address);
             session.setAttribute("paymentMethod", paymentMethod);

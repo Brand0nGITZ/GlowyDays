@@ -1,32 +1,30 @@
 package model;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "SHIPPINGDETAIL")
 public class ShippingDetail {
 
-    @Id
-    @Column(name = "shippingId")
+    private int userId;  
     private String shippingId;
-
-    @ManyToOne
-    @JoinColumn(name = "buyerId", nullable = false)
     private BuyerDetail buyer;
-
-    @ManyToOne
-    @JoinColumn(name = "addressId", nullable = false)
-    private Address address;
+    private Address address; 
 
     // Constructors
     public ShippingDetail() {}
 
-    public ShippingDetail(BuyerDetail buyer, Address address) {
+    public ShippingDetail(int userId, String shippingId, BuyerDetail buyer, Address address) {
+        this.shippingId = shippingId;
         this.buyer = buyer;
         this.address = address;
     }
 
     // Getters and Setters
+    public int getUserId() { 
+        return userId; 
+    } 
+    
+    public void setUserId(int userId) { 
+        this.userId = userId; 
+    } 
+    
     public String getShippingId() {
         return shippingId;
     }

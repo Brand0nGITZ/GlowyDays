@@ -1,89 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import dao.CartDAO;
+import dao.CheckoutDAO;
+import model.CartItem;
+import model.CheckoutDetail;
+import dao.ShippingDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import dao.PaymentDAO;
 
-/**
- *
- * @author yapji
- */
+import java.io.IOException;
+import java.util.List;
+import model.PaymentMethod;
+import model.ShippingDetail;
+
+@WebServlet("/CheckoutReviewServlet")
 public class CheckoutReviewServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            
-           
+     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        int userId = Integer.parseInt((String) session.getAttribute("user_id")); // your session stores user_id as String
         
-         HttpSession session = request.getSession();
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CheckoutReviewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CheckoutReviewServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        CartDAO cartDAO = new CartDAO();
+        CheckoutDAO checkoutDAO = new CheckoutDAO();
+        ShippingDAO shippingDAO = new ShippingDAO();
+        PaymentDAO paymentDAO = new PaymentDAO();
+        
+
+        List<CartItem> cartItems = cartDAO.getCartItems(userId);
+        CheckoutDetail checkoutDetail = checkoutDAO.getCheckoutDetailByUserId(userId);
+        List<ShippingDetail> shippingList = shippingDAO.getAllShippingDetails(String.valueOf(userId)); // Call method from ShippingDAO
+        List<PaymentMethod> paymentMethods = paymentDAO.getAllPaymentMethods(userId);
+               
+        session.setAttribute("cartItems", cartItems);
+        session.setAttribute("checkoutDetail", checkoutDetail);
+        session.setAttribute("shippingList", shippingList);
+        session.setAttribute("paymentMethod", paymentMethods);
+        
+        
+        
+        response.sendRedirect(request.getContextPath() + "/JSP/CheckoutReview.jsp");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response); // Not needed but safe
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

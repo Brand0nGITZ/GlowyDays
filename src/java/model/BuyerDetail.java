@@ -1,28 +1,18 @@
 package model;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "BUYERDETAIL")
 public class BuyerDetail {
 
-    @Id
-    @Column(name = "buyerId")
     private String buyerId;
-
-    @Column(name = "fullName", nullable = false)
+    private int userId;          
     private String fullName;
-
-    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "mobile", nullable = false)
     private String mobile;
 
     // Constructors
     public BuyerDetail() {}
 
-    public BuyerDetail(String fullName, String email, String mobile) {
+    public BuyerDetail(int userId, String fullName, String email, String mobile) {
+        this.userId = userId;
         this.fullName = fullName;
         this.email = email;
         this.mobile = mobile;
@@ -35,6 +25,14 @@ public class BuyerDetail {
 
     public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
+    }
+
+    public int getUserId() {          
+        return userId;
+    }
+
+    public void setUserId(int userId) {  
+        this.userId = userId;
     }
 
     public String getFullName() {

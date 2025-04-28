@@ -16,7 +16,7 @@ public class PaymentDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
     }
 
-    public boolean savePayment(PaymentMethod method) {
+    public boolean savePayment(PaymentMethod method , int userId) {
         Connection con = null;
         PreparedStatement methodStmt = null;
         PreparedStatement payStmt = null;
@@ -34,7 +34,7 @@ public class PaymentDAO {
             String nextPaymentId = generatePaymentId(con);     
 
             // 2. Insert into PaymentMethod db
-            String methodSql = "INSERT INTO APP.PAYMENTMETHOD (\"methodId\", \"methodName\", \"cardOwner\", \"cardNumber\", \"expMonth\", \"expYear\", \"cvv\") VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String methodSql = "INSERT INTO APP.PAYMENTMETHOD (\"methodId\", \"methodName\", \"cardOwner\", \"cardNumber\", \"expMonth\", \"expYear\", \"cvv\", \"user_id\") VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
             methodStmt = con.prepareStatement(methodSql);
             methodStmt.setString(1, nextMethodId);
             methodStmt.setString(2, method.getMethodName());
@@ -43,15 +43,19 @@ public class PaymentDAO {
             methodStmt.setString(5, method.getExpMonth());
             methodStmt.setString(6, method.getExpYear());
             methodStmt.setString(7, method.getCvv());
+            methodStmt.setInt(8, userId);
+            
+            
             methodStmt.executeUpdate();
 
             // 3. Insert into Payment db
-            String paySql = "INSERT INTO APP.PAYMENT (\"paymentId\", \"methodId\", \"paidDate\", \"paidTime\") VALUES (?, ?, ?, ?)";
+            String paySql = "INSERT INTO APP.PAYMENT (\"paymentId\", \"methodId\", \"user_id\" , \"paidDate\", \"paidTime\" ) VALUES (?, ?, ?, ?, ?)";
             payStmt = con.prepareStatement(paySql);
             payStmt.setString(1, nextPaymentId);
             payStmt.setString(2, nextMethodId); 
-            payStmt.setDate(3, Date.valueOf(LocalDate.now()));
-            payStmt.setTime(4, Time.valueOf(LocalTime.now()));
+            payStmt.setInt(3, userId);
+            payStmt.setDate(4, Date.valueOf(LocalDate.now()));
+            payStmt.setTime(5, Time.valueOf(LocalTime.now()));
             payStmt.executeUpdate();
 
             // Commit transaction
@@ -82,6 +86,51 @@ public class PaymentDAO {
         return success;
     }
     
+   public List<PaymentMethod> getAllPaymentMethods(int userId) {
+    List<PaymentMethod> paymentMethods = new ArrayList<>();
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();
+        
+        // Here you JOIN PAYMENTMETHOD and PAYMENT table
+        String sql = "SELECT m.* FROM APP.PAYMENTMETHOD m " +
+                     "JOIN APP.PAYMENT p ON m.\"methodId\" = p.\"methodId\" " +
+                     "WHERE p.\"user_id\" = ?";
+                     
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, userId);
+        
+        rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            PaymentMethod method = new PaymentMethod();
+            method.setMethodId(rs.getString("methodId"));
+            method.setMethodName(rs.getString("methodName"));
+            method.setCardOwner(rs.getString("cardOwner"));
+            method.setCardNumber(rs.getString("cardNumber"));
+            method.setExpMonth(rs.getString("expMonth"));
+            method.setExpYear(rs.getString("expYear"));
+            method.setCvv(rs.getString("cvv"));
+            method.setUserId(rs.getInt("user_Id"));
+            paymentMethods.add(method);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return paymentMethods;
+}
+    
     // Generate for methodId -> PMD-0001
     private String generateMethodId(Connection con) throws SQLException {
         String sql = "SELECT MAX(\"methodId\") AS maxId FROM APP.PAYMENTMETHOD";
@@ -111,7 +160,38 @@ public class PaymentDAO {
             }
         }
     }
+    
+    
+    
+     public static void main(String[] args) {
+        PaymentDAO paymentDAO = new PaymentDAO();
+        
+        String buyerId = "BYR-0018"; // Use an actual buyerId from your database
+        int userId = 8;
+
+        List<PaymentMethod> paymentMethods = paymentDAO.getAllPaymentMethods(userId);
+
+        if (paymentMethods.isEmpty()) {
+            System.out.println("No payment methods found for userId: " + userId);
+        } else {
+            for (PaymentMethod payment : paymentMethods) {
+                System.out.println("Method ID: " + payment.getMethodId());
+                System.out.println("Method Name: " + payment.getMethodName());
+                System.out.println("Card Owner: " + payment.getCardOwner());
+                System.out.println("Card Number: " + payment.getCardNumber());
+                System.out.println("Expiration Month: " + payment.getExpMonth());
+                System.out.println("Expiration Year: " + payment.getExpYear());
+                System.out.println("CVV: " + payment.getCvv());
+                System.out.println("----------------------");
+            }
+        }
+    }
+    
+    
 }
+
+
+
 
 // FOR TESTING PURPOSE
 //    public List<PaymentMethod> getAllPaymentMethods() {

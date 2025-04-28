@@ -3,7 +3,6 @@ package dao;
 import model.Address;
 import model.BuyerDetail;
 import model.ShippingDetail;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ public class ShippingDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
     }
 
-    public boolean saveShipping(BuyerDetail buyer, Address address) {
+    public boolean saveShipping(BuyerDetail buyer, Address address, int userId) {
         Connection con = null;
         PreparedStatement buyerStmt = null;
         PreparedStatement addressStmt = null;
@@ -35,30 +34,33 @@ public class ShippingDAO {
             String nextShippingId = generateShippingId(con);
             
             // 1. Insert into BuyerDetail db
-            String buyerSql = "INSERT INTO APP.BUYERDETAIL (\"buyerId\", \"fullName\", \"email\", \"mobile\") VALUES (?, ?, ?, ?)";
+            String buyerSql = "INSERT INTO APP.BUYERDETAIL (\"buyerId\", \"user_id\" , \"fullName\", \"email\", \"mobile\") VALUES (?, ?, ?, ?, ?)";
             buyerStmt = con.prepareStatement(buyerSql);
             buyerStmt.setString(1, nextBuyerId);
-            buyerStmt.setString(2, buyer.getFullName());
-            buyerStmt.setString(3, buyer.getEmail());
-            buyerStmt.setString(4, buyer.getMobile());
+            buyerStmt.setInt(2, userId);
+            buyerStmt.setString(3, buyer.getFullName());
+            buyerStmt.setString(4, buyer.getEmail());
+            buyerStmt.setString(5, buyer.getMobile());
             buyerStmt.executeUpdate(); 
             
             // 2. Insert into Address db
-            String addressSql = "INSERT INTO APP.ADDRESS (\"addressId\", \"address\", \"city\", \"state\", \"postcode\") VALUES (?, ?, ?, ?, ?)";
+            String addressSql = "INSERT INTO APP.ADDRESS (\"addressId\", \"user_id\" , \"address\", \"city\", \"state\", \"postcode\") VALUES (?, ?, ?, ?, ?, ?)";
             addressStmt = con.prepareStatement(addressSql);
             addressStmt.setString(1, nextAddressId);
-            addressStmt.setString(2, address.getAddress());
-            addressStmt.setString(3, address.getCity());
-            addressStmt.setString(4, address.getState());
-            addressStmt.setString(5, address.getPostcode());
+            addressStmt.setInt(2, userId);
+            addressStmt.setString(3, address.getAddressId());
+            addressStmt.setString(4, address.getCity());
+            addressStmt.setString(5, address.getState());
+            addressStmt.setString(6, address.getPostcode());
             addressStmt.executeUpdate();
 
             // 3. Insert into ShippingDetail db (link buyerId & addressId)
-            String shipSql = "INSERT INTO APP.SHIPPINGDETAIL (\"shippingId\", \"buyerId\", \"addressId\") VALUES (?, ?, ?)";
+            String shipSql = "INSERT INTO APP.SHIPPINGDETAIL (\"shippingId\", \"buyerId\", \"addressId\" , \"user_id\") VALUES (?, ?, ?, ?)";
             shipStmt = con.prepareStatement(shipSql);
             shipStmt.setString(1, nextShippingId);
             shipStmt.setString(2, nextBuyerId);
             shipStmt.setString(3, nextAddressId);
+            shipStmt.setInt(4, userId);
             shipStmt.executeUpdate();
 
             // Commit transaction
@@ -89,6 +91,60 @@ public class ShippingDAO {
         return success;
     }
     
+ public List<ShippingDetail> getAllShippingDetails(String buyerId) {
+    List<ShippingDetail> shippingList = new ArrayList<>();
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();
+        String sql = "SELECT sd.\"shippingId\", sd.\"buyerId\", a.\"addressId\", a.\"city\", a.\"state\", a.\"postcode\" " +
+                     "FROM APP.SHIPPINGDETAIL sd " +
+                     "JOIN APP.ADDRESS a ON sd.\"addressId\" = a.\"addressId\" " +
+                     "WHERE sd.\"buyerId\" = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, buyerId); // Setting the buyerId parameter here
+        
+        rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            
+            ShippingDetail shipping = new ShippingDetail();
+            shipping.setShippingId(rs.getString("shippingId"));
+             BuyerDetail buyer = new BuyerDetail();
+             buyer.setBuyerId(rs.getString("buyerId"));
+            shipping.setBuyer(buyer);
+
+            // Populate Address object from the result set
+            Address address = new Address();
+            address.setAddressId(rs.getString("addressId"));
+            address.setCity(rs.getString("city"));
+            address.setState(rs.getString("state"));
+            address.setPostcode(rs.getString("postcode"));
+
+            // Set the populated Address object into the ShippingDetail
+            shipping.setAddress(address);
+
+            // Add the shipping detail to the list
+            shippingList.add(shipping);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return shippingList;
+}
+
+    
+    
     // Generate BuyerId like BYR-0001
     private String generateBuyerId(Connection con) throws SQLException {
         String sql = "SELECT MAX(\"buyerId\") AS maxId FROM APP.BUYERDETAIL";
@@ -103,6 +159,8 @@ public class ShippingDAO {
             }
         }
     }
+    
+    
 
     // Generate AddressId -> ADS-0001
     private String generateAddressId(Connection con) throws SQLException {
@@ -133,7 +191,57 @@ public class ShippingDAO {
             }
         }
     }
+    
+ public static void main(String[] args) {
+    // Example buyerId, replace with an actual buyerId from your database
+    String buyerId = "BYR-0018"; 
+    
+    // Create instance of the DAO class
+    ShippingDAO shippingDetailDAO = new ShippingDAO();
+    
+    // Get all shipping details for the specified buyerId
+    List<ShippingDetail> shippingDetails = shippingDetailDAO.getAllShippingDetails(buyerId);
+
+    // Print the results
+    if (shippingDetails.isEmpty()) {
+        System.out.println("No shipping details found for buyerId: " + buyerId);
+    } else {
+        for (ShippingDetail shipping : shippingDetails) {
+            System.out.println("Shipping ID: " + shipping.getShippingId());
+            System.out.println("Buyer ID: " + shipping.getBuyer().getBuyerId());
+
+            // Access Address details via addressId
+            Address address = shipping.getAddress();  // Get the Address object
+
+            // Print the Address details
+            System.out.println("Address ID: " + address.getAddressId());
+            System.out.println("City: " + address.getCity());
+            System.out.println("State: " + address.getState());
+            System.out.println("Postcode: " + address.getPostcode());
+            System.out.println("----------------------");
+        }
+    }
+ }
+ 
+ public String getLatestShippingId(int userId) {
+    String shippingId = null;
+    try (Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass")) {
+        String sql = "SELECT shippingId FROM APP.\"ShippingDetail\" WHERE user_Id = ? ORDER BY shippingDate DESC LIMIT 1";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                shippingId = resultSet.getString("shippingId");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return shippingId;
 }
+}
+
+
 
 ////FOR TESTING PURPOSE
 //package dao;
