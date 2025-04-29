@@ -1,5 +1,3 @@
-
-
 import dao.OrderDAO;
 import model.Order;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,15 +7,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-@WebServlet("/OrderServlet")
-public class OrderServlet extends HttpServlet {
+@WebServlet("/OrderServlett")
+public class OrderServlett extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection conn = DriverManager.getConnection(
-                "jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/myderbyDB", "user", "pass");
 
             // 🔽 Add this block here BEFORE setting attributes or forwarding
             HttpSession session = request.getSession();

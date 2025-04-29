@@ -66,7 +66,7 @@
                 <td>
                     <a href="EditUserDetails.jsp?id=<%= resultSet.getString("user_id") %>" class="action-link edit"><i class="fas fa-pen"></i></a>
                     <a href="<%= request.getContextPath() %>/RemoveUserServlet?id=<%= resultSet.getString("user_id") %>" 
-                    onclick="return confirm('Are you sure you want to delete this user? ')" 
+                    onclick="return confirm('Are you sure you want to delete this user?')" 
                     class="action-link delete">
                     <i class="fas fa-trash"></i>                
                     </a>

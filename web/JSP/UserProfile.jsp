@@ -8,41 +8,45 @@
         <!-- Font Awesome CDN Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <!-- CSS -->
-        <link rel="stylesheet" href="../CSS/home.css?v=3">
+        <link rel="stylesheet" href="../CSS/home.css?v=4">
         <link rel="stylesheet" href="../CSS/UserProfile.css?v=4">
         <!-- <link rel="stylesheet" href="../CSS/home.css?v=2"> -->
-
+            <style>
+        .logo img {
+            width: 90px; /* Adjust the width according to your design */
+            height: 60px; /* Keep aspect ratio */
+            display: block;
+        }
+    </style>
     </head>
     <body>
-         <section id="header" class="header">   
-             <a href="GuestHome.jsp"><h2 style="font-weight: bolder; font-size: 3rem; color: black;">GLOWY DAYS</h2></a>
-               <div class="navbar">
-                    <a href="">Home</a>
-                    <div class="dropdown">
-                        <a href="#">Product</a>
-                        <div class="dropdown-content">
-                            <a href="#">Skincare</a>
-                            <a href="#">Makeup</a>
-                            <a href="#">Hair Care</a>
-                            <a href="#">Body Care</a>
-                            <a href="#">Fragrance</a>
-                            <a href="#">Tools</a>
-                            <a href="#">Men's Care</a>
-                            <a href="#">Sets & Gifts</a>
-                        </div>
-                    </div>
-                    <a href="">About Us</a>               
-                    <a href="">Contact Us</a>                             
-               </div>
-               <div class="icons">
-                    <div class="search-wrapper">
-                        <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
-                        <input type="text" id="search-box" placeholder="Search..." />
-                    </div>
-                    <a href="" class="fa-solid fa-cart-shopping"></a>    
-                    <a href="Register.jsp" class="fa-regular fa-user"></a>
-               </div>
-        </section>
+         <section id="header" class="header">
+    <a href="UserHome.jsp" class="logo">
+        <img src="../ICON/logo2.png" alt="Glowy Days Logo">
+    </a>
+    <div class="navbar">
+        <a href="UserHome.jsp">Home</a>
+        <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
+        <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>              
+        <a href="AboutUs.jsp">About Us</a>                           
+    </div>
+    <div class="icons">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
+            <input type="text" id="search-box" placeholder="Search..." />
+        </div>
+        <a href="<%= request.getContextPath() %>/LoadCartServlet" class="fa-solid fa-cart-shopping"></a>    
+        <div class="avatar-container">
+            <i class="fa-regular fa-user" style="font-size:18px; cursor:pointer;"></i> 
+            <div class="dropdown-menu">
+              
+             
+                <a class="dropdown-item" href="UserProfile.jsp">User Profile</a>
+                <a class="dropdown-item" href="<%= request.getContextPath() %>/LogoutServlet">Log Out</a>
+            </div>
+        </div>
+    </div>
+</section>
        <%
             String name = (String) session.getAttribute("name");
             String username = (String) session.getAttribute("username");
@@ -104,8 +108,13 @@
                         </fieldset>
                     </div>
                 </div>
+                            
             </div>
+                            
+                            
         </div>
+                            
+                            
                         
     </body>
 </html>

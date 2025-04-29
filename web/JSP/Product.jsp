@@ -10,22 +10,69 @@
         <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ProductCSS.css?v=5">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <title>Product</title>
+        
+        <style>
+            .avatar-container {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-menu {
+                display: none;
+                position: absolute;
+                top: 45px;
+                left: -10px;
+                z-index: 1000;
+            }
+
+            .avatar-container .dropdown-menu a {
+                /* 这样写就只影响avatar那边的下拉menu */
+                display: block;
+                text-decoration: none;
+                color: black;
+                background-color: white;
+                width: 180px;
+                border: 1px solid #ccc;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .avatar-container .dropdown-menu a:hover {
+                background-color: #F9E075;
+                color: black;
+            }
+
+            .avatar-container:hover .dropdown-menu {
+                display: block;
+            }
+
+            .logo img {
+                width: 90px; /* Adjust the width according to your design */
+                height: 60px; /* Keep aspect ratio */
+                display: block;
+            }
+        </style>
+        
     </head>
-    
+
     <body> 
         <section id="header" class="header">   
             <a href="GuestHome.jsp"><h2 style="font-weight: bolder; font-size: 3rem; color: black;">GLOWY DAYS</h2></a>
             <div class="navbar">
-                <a href="">Home</a>
-                <a href="#" class="active">Product</a> 
-                <a href="">About Us</a>               
-                <a href="">Contact Us</a>                             
+                <a href="UserHome.jsp">Home</a>
+                <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
+                <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>              
+                <a href="JSP/AboutUs.jsp">About Us</a>                             
             </div>
             <div class="icons">
+                
+    
                 <div class="search-wrapper">
                     <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
-                    <input type="text" id="search-box" name="query" placeholder="Search by ID or Name" />
+                    <form id="search-box" action="<%= request.getContextPath()%>/SearchProductServlet" method="get">
+                        <input type="text" name="query" placeholder="Search by ID or Name">
+                    </form>
                 </div>
+               
                 <a href="<%= request.getContextPath() %>/CartServlet" class="cart-icon fa-solid fa-cart-shopping">
                     <%
                         Integer cartSize = (Integer) session.getAttribute("cartSize");
@@ -36,7 +83,7 @@
                         }
                     %>
                 </a>    
-                <a href="AddNewUser.jsp" class="fa-regular fa-user"></a>
+                <a href="/JSP/AddNewUser.jsp" class="fa-regular fa-user"></a>
             </div>
         </section>
 
@@ -262,6 +309,8 @@
                 });
             });
         </script>
-        <script src="../Javascript/main.js"></script>
+        
+        
+       
     </body>
 </html>

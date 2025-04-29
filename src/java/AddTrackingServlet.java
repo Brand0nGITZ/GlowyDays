@@ -29,7 +29,7 @@ public class AddTrackingServlet extends HttpServlet {
             if (orderDAO.isTrackingNumberExists(trackingNo)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("error", "Tracking number already exists. Please enter a new one.");
-                response.sendRedirect("OrderServlet");
+                response.sendRedirect("/GlowyDaysProjectNew/OrderServlett");
                 return;
             }
 
@@ -42,7 +42,7 @@ public class AddTrackingServlet extends HttpServlet {
             // Update order's shipped status
             orderDAO.updateOrderStatus(orderId);
 
-            response.sendRedirect("OrderServlet");
+            response.sendRedirect("/GlowyDaysProjectNew/OrderServlett");
 
         } catch (Exception e) {
             e.printStackTrace();

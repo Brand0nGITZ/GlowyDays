@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Home</title>
-        <link rel="stylesheet" href="../CSS/home.css?v=4">
+        <link rel="stylesheet" href="../CSS/home.css?v=6">
         <link rel="stylesheet" href="../CSS/updateUser.css?v=3">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -45,6 +45,11 @@
                 display: block;
             }
             
+            .logo img {
+            width: 90px; /* Adjust the width according to your design */
+            height: 60px; /* Keep aspect ratio */
+            display: block;
+        }
         </style>
         
     </head>
@@ -57,32 +62,33 @@
             String mobileNo = (String) session.getAttribute("mobileNo");
         %>
 
-        <section id="header" class="header">
-            <a href="UserHome.jsp">
-                <h2 style="font-weight: bolder; font-size: 3rem; color: black;">GLOWY DAYS</h2>
-            </a>
-            <div class="navbar">
-                <a href="UserHome.jsp">Home</a>
-                <a href="#">Product</a>
-                <a href="">About Us</a>               
-                <a href="">Contact Us</a>                             
+          <section id="header" class="header">
+    <a href="UserHome.jsp" class="logo">
+        <img src="../ICON/logo2.png" alt="Glowy Days Logo">
+    </a>
+    <div class="navbar">
+        <a href="UserHome.jsp">Home</a>
+        <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
+        <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>              
+        <a href="AboutUs.jsp">About Us</a>                           
+    </div>
+    <div class="icons">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
+            <input type="text" id="search-box" placeholder="Search..." />
+        </div>
+        <a href="<%= request.getContextPath() %>/LoadCartServlet" class="fa-solid fa-cart-shopping"></a>    
+        <div class="avatar-container">
+            <i class="fa-regular fa-user" style="font-size:18px; cursor:pointer;"></i> 
+            <div class="dropdown-menu">
+              
+             
+                <a class="dropdown-item" href="UserProfile.jsp">User Profile</a>
+                <a class="dropdown-item" href="<%= request.getContextPath() %>/LogoutServlet">Log Out</a>
             </div>
-            <div class="icons">
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
-                    <input type="text" id="search-box" placeholder="Search..." />
-                </div>
-                <a href="" class="fa-solid fa-cart-shopping"></a>    
-                <div class="avatar-container">
-                    <i class="fa-regular fa-user" style="font-size:24px; cursor:pointer;"></i> 
-                    <div class="dropdown-menu">
-                        <a style="pointer-events: none;">Username: <%= username %></a>
-                        <a class="dropdown-item" href="../JSP/UserProfile.jsp">User Profile</a>
-                        <a class="dropdown-item" href="<%= request.getContextPath() %>/LogoutServlet">Log Out</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
                     
         <div id="details">
             <br />

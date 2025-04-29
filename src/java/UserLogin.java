@@ -30,6 +30,7 @@ public class UserLogin extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRole());
                 
                 String role = user.getRole().trim().toLowerCase();

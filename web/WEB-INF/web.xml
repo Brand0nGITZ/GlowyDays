@@ -160,6 +160,22 @@
         <servlet-name>ClearCartServlet</servlet-name>
         <servlet-class>ClearCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmOrderServlet</servlet-name>
+        <servlet-class>ConfirmOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>DashboardServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportGenServlet</servlet-name>
+        <servlet-class>ReportGenServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserOrderServlet</servlet-name>
+        <servlet-class>ViewUserOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
@@ -319,5 +335,21 @@
     <servlet-mapping>
         <servlet-name>ClearCartServlet</servlet-name>
         <url-pattern>/ClearCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmOrderServlet</servlet-name>
+        <url-pattern>/ConfirmOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/DashboardServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportGenServlet</servlet-name>
+        <url-pattern>/ReportGenServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewUserOrderServlet</servlet-name>
+        <url-pattern>/ViewUserOrderServlet</url-pattern>
     </servlet-mapping>
 </web-app>

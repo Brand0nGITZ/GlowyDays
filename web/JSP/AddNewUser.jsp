@@ -8,6 +8,10 @@
 <jsp:setProperty name="user" property="mobileNo" param="mobileNo" />
 <jsp:setProperty name="user" property="password" param="password" />
 
+<%
+    session.invalidate();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>

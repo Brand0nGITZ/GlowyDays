@@ -7,7 +7,6 @@ import model.User;
 
 public class LoginDAO {
 
-    // 登录功能
     public boolean loginUser(Login login, HttpServletRequest request) {
         boolean isLogin = false;
 
@@ -30,6 +29,8 @@ public class LoginDAO {
                 Date birth = rs.getDate("birth");
                 String email = rs.getString("email");
                 String mobileNo = rs.getString("mobileNo");// 从数据库取出 username
+                String password = rs.getString("password");
+                String role = rs.getString("role");
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user_id", userID);
@@ -38,9 +39,8 @@ public class LoginDAO {
                 session.setAttribute("birth", birth != null ? birth.toString() : null);
                 session.setAttribute("email", email);
                 session.setAttribute("mobileNo", mobileNo);
-                
-                
-                
+                session.setAttribute("password",password);
+                session.setAttribute("role",role);
             }
 
             rs.close();
@@ -53,7 +53,6 @@ public class LoginDAO {
         return isLogin;
     }
 
-    // 🆕 添加：检查 email 是否已注册（Forgot Password 用）
     public boolean isEmailRegistered(String email) {
         boolean exists = false;
 
@@ -139,7 +138,7 @@ public class LoginDAO {
                 isRegistered = true;
                 System.out.println("✅ Registered user with role: " + user.getRole());
             } else {
-                System.out.println("⚠️ No rows inserted!");
+                System.out.println("⚠ No rows inserted!");
             }
 
             pst.close();

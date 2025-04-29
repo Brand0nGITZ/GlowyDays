@@ -23,7 +23,7 @@
         <a href="UserHome.jsp">Home</a>
         <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
         <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>              
-        <a href="">About Us</a>                           
+        <a href="AboutUs.jsp">About Us</a>                           
     </div>
     <div class="icons">
         <div class="search-wrapper">
@@ -39,59 +39,42 @@
                 String username = (String) session.getAttribute("username");
                 %>
                 <a style="pointer-events: none;">Username: <%= username %></a>
-                <a class="dropdown-item" href="../JSP/UserProfile.jsp">User Profile</a>
+                <a class="dropdown-item" href="UserProfile.jsp">User Profile</a>
                 <a class="dropdown-item" href="<%= request.getContextPath() %>/LogoutServlet">Log Out</a>
             </div>
         </div>
     </div>
 </section>
-
-                
-                
-                
-    <section class="home" id="home">
-            <div class="slide active" style="background:url(../Slides/Slide_1.png); background-size: cover; 
-            background-position: center;">
-            <div class="content" >
-                <span>Keep Your Beauty</span>
-                <h3>Discover the essence of true beauty with our carefully curated skincare 
-                    collection. where every product is designed to nourish, rejuvenate, and 
-                    bring out your natural glow. Embrace confidence, radiance, and self-love 
-                    in every step of your routine.
-                </h3>
-                <a href="#" class="btn">Read More</a>
-            </div>    
-            </div>
-            
-            <div class="slide" style="background:url(../Slides/Slide_2.png); background-size: cover; 
-            background-position: center;">
-            <div class="content" >
-                <span>Keep Your Beauty</span>
-                <h3>Discover the essence of true beauty with our carefully curated skincare 
-                    collection. where every product is designed to nourish, rejuvenate, and 
-                    bring out your natural glow. Embrace confidence, radiance, and self-love 
-                    in every step of your routine.
-                </h3>
-                <a href="#" class="btn">Read More</a>
-            </div>    
-            </div>
-            
-            <div class="slide" style="background:url(../Slides/Slide_11.png); background-size: cover; 
-            background-position: center;">
+             
+        <section class="home" id="home">
+        <div class="slide active" style="background:url(../Slides/Slide_1.png); background-size: cover; background-position: center;">
             <div class="content">
-                <span>Keep Your Beauty</span>
-                <h3>Discover the essence of true beauty with our carefully curated skincare 
-                    collection. where every product is designed to nourish, rejuvenate, and 
-                    bring out your natural glow. Embrace confidence, radiance, and self-love 
-                    in every step of your routine.
-                </h3>
+                <span>Glow Naturally</span>
+                <h3>Experience skincare that celebrates your natural beauty, enhancing your glow from within with nourishing, organic ingredients.</h3>
                 <a href="#" class="btn">Read More</a>
             </div>    
-            </div>
-            
-            <div id="next-slide" onclick="next()" class="fas fa-angle-right"></div>
-            <div id="prev-slide" onclick="prev()" class="fas fa-angle-left"></div>
-        </section>  
+        </div>
+
+        <div class="slide" style="background:url(../Slides/Slide_2.png); background-size: cover; background-position: center;">
+            <div class="content">
+                <span>Revitalize Your Skin</span>
+                <h3>Transform your daily routine into a rejuvenating ritual with our advanced formulas that repair, hydrate, and protect.</h3>
+                <a href="#" class="btn">Read More</a>
+            </div>    
+        </div>
+
+        <div class="slide" style="background:url(../Slides/Slide_11.png); background-size: cover; background-position: center;">
+            <div class="content">
+                <span>Embrace Your Beauty</span>
+                <h3>Unlock the power of self-care with products that empower you to feel confident, radiant, and beautifully yourself every day.</h3>
+                <a href="#" class="btn">Read More</a>
+            </div>    
+        </div>
+
+        <div id="next-slide" onclick="next()" class="fas fa-angle-right"></div>
+        <div id="prev-slide" onclick="prev()" class="fas fa-angle-left"></div>
+    </section>
+  
         
         <section class="category">
             <div class="box-container">

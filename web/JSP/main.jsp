@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.Promotion" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +8,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <!-- CSS -->
         <link rel="stylesheet" href="../CSS/home.css?v=3">
-     
+        <!-- <link rel="stylesheet" href="../CSS/home.css?v=2"> -->
 
     </head>
     <body>
@@ -17,23 +16,7 @@
              <a href="GuestHome.jsp"><h2 style="font-weight: bolder; font-size: 3rem; color: black;">GLOWY DAYS</h2></a>
                <div class="navbar">
                     <a href="">Home</a>
-                    <div class="dropdown">
-                        <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
-                        <div class="dropdown-content">
-                            <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>
-                            <a href="#">Makeup</a>
-                            <a href="#">Hair Care</a>
-                            <a href="#">Body Care</a>
-                            <a href="#">Fragrance</a>
-                            <a href="#">Tools</a>
-                            <a href="#">Men's Care</a>
-                            <a href="#">Sets & Gifts</a>
-                        </div>
-                            
-                            
-                            
-                            
-                    </div>
+                    <a href="#">Product</a> 
                     <a href="">About Us</a>               
                     <a href="">Contact Us</a>                             
                </div>
@@ -43,7 +26,7 @@
                         <input type="text" id="search-box" placeholder="Search..." />
                     </div>
                     <a href="" class="fa-solid fa-cart-shopping"></a>    
-                    <a href="" class="fa-regular fa-user"></a>
+                    <a href="AddNewUser.jsp" class="fa-regular fa-user"></a>
                </div>
         </section>
       
@@ -116,7 +99,7 @@
                 
                 <a href="#" class="box">
                     <img class="img" src="../Category/Category_ExfoliatingToner.png">
-                    <h3>Exfoliating Toner</h3>
+                    <h3>ExfoliatingToner</h3>
                 </a>
                 
                 <a href="#" class="box">
@@ -132,7 +115,7 @@
 
               <!-- Cleanser Card -->
               <div class="card">
-                <img src="../ProductImages/GlowyCleanser.jpg?height=200&width=400" alt="Glowy Cleanser" class="card__image">
+                <img src="../PeoductImages/GlowyCleanser.jpg?height=200&width=400" alt="Glowy Cleanser" class="card__image">
                 <div class="card__content">
                   <h2 class="card__title">Glowy Gentle Cleanser</h2>
                   <p class="card__description">A soothing facial cleanser that removes dirt and impurities without stripping your skin’s natural moisture. Perfect for daily use on all skin types.</p>
@@ -142,7 +125,7 @@
 
               <!-- Toner Card -->
               <div class="card">
-                <img src="../ProductImages/GlowyToner.jpg?height=200&width=400" alt="Glowy Toner" class="card__image">
+                <img src="../PeoductImages/GlowyToner.jpg?height=200&width=400" alt="Glowy Toner" class="card__image">
                 <div class="card__content">
                   <h2 class="card__title">Glowy Hydrating Toner</h2>
                   <p class="card__description">Refresh and rebalance your skin with our alcohol-free toner enriched with botanical extracts. Helps tighten pores and prepare your skin for the next steps.</p>
@@ -152,7 +135,7 @@
 
               <!-- Vitamin C Serum Card -->
               <div class="card">
-                <img src="../ProductImages/GlowyVitaminC.jpg?height=200&width=400" alt="Glowy Vitamin C Serum" class="card__image">
+                <img src="../PeoductImages/GlowyVitaminC.jpg?height=200&width=400" alt="Glowy Vitamin C Serum" class="card__image">
                 <div class="card__content">
                   <h2 class="card__title">Glowy Vitamin C Serum</h2>
                   <p class="card__description">Brighten and even out your skin tone with this powerful antioxidant-rich serum. Helps reduce dark spots and gives your skin a radiant glow.</p>
@@ -162,7 +145,7 @@
 
               <!-- Sunscreen Card -->
               <div class="card">
-                <img src="../ProductImages/GlowySunscreen.jpg?height=200&width=400" alt="Glowy Sunscreen" class="card__image">
+                <img src="../PeoductImages/GlowySunscreen.jpg?height=200&width=400" alt="Glowy Sunscreen" class="card__image">
                 <div class="card__content">
                   <h2 class="card__title">Glowy UV Defense Sunscreen</h2>
                   <p class="card__description">Protect your skin from harmful UVA & UVB rays with our lightweight, non-greasy sunscreen. Ideal for daily wear with no white cast.</p>
@@ -195,7 +178,7 @@
             </div>
 
         </section>
-        
+    
     <section class="footer">
         <div class="box-container">
 
@@ -242,5 +225,5 @@
      </section>
   
     <script src="../Javascript/main.js"></script>
-
+     </body>
 </html>

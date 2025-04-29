@@ -31,20 +31,20 @@
         }
     %>
 </head>
-<body>
-    <section id="header" class="header">   
-        <a href="GuestHome.jsp"><h2 style="font-weight: bolder; font-size: 2.2rem; color: black;">GLOWY DAYS</h2></a>
-        <div class="navbar">
-            <a href="">Home</a>
-            <a href="#" class="active">Product</a> 
-            <a href="">About Us</a>               
-            <a href="">Contact Us</a>                             
-        </div>
-        <div class="icons">
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
-                <input type="text" id="search-box" name="query" placeholder="Search by ID or Name" />
+<body> 
+        <section id="header" class="header">   
+            <a href="GuestHome.jsp"><h2 style="font-weight: bolder; font-size: 3rem; color: black;">GLOWY DAYS</h2></a>
+            <div class="navbar">
+                 <a href="UserHome.jsp">Home</a>
+                 <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
+                 <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>              
+                 <a href="JSP/AboutUs.jsp">About Us</a>                            
             </div>
+            <div class="icons">
+               <form action="<%= request.getContextPath() %>/SearchProductServlet" method="get">
+    <input type="text" name="query" placeholder="Search by ID or Name">
+    <button type="submit">Search</button>
+</form>
             <a href="<%= request.getContextPath() %>/CartServlet" class="cart-icon fa-solid fa-cart-shopping">
                 <%
                     Integer cartSize = (Integer) session.getAttribute("cartSize");
@@ -81,17 +81,21 @@
                         <h3><%= product.getName() %> (PROMO)</h3>
                         <img src="<%= request.getContextPath() %>/ProductImages/<%= product.getImageUrl() %>" alt="<%= product.getName() %>" width="300">
                         
-                        <form action="<%= request.getContextPath() %>/LoadCartServlet" method="POST">
+                        <form action="<%= request.getContextPath() %>/CartServlet" method="POST">
                             <input type="hidden" name="PRODUCT_ID" value="<%= product.getId() %>" />
                             <input type="hidden" name="IMAGE_URL" value="<%= product.getImageUrl() %>" />
                             <input type="hidden" name="PRODUCTNAME" value="<%= product.getName() + " (PROMO)" %>" />
-                            
+                            <input type="hidden" name="PRICE" value="<%= product.getPrice() %>" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="user_id" value="<%= session.getAttribute("user_id") %>" />
                             
                             <%
                                 double discountedPrice = product.getPrice() * (1 - product.getDiscount());
                             %>
                             <input type="hidden" name="PRICE" value="<%= String.format("%.2f", discountedPrice) %>" />
-                            <button type="submit">Add to Cart</button>
+                            <button type="submit" class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </button>
                         </form>
                         <p>Original Price: RM <%= product.getPrice() %></p>
                         <%

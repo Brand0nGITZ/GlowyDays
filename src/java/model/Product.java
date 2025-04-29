@@ -84,4 +84,8 @@ public class Product implements Serializable {
 public void setDiscount(double discount) {
     this.discount = discount;
 }
+
+    public String getProductId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

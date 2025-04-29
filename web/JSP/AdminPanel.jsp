@@ -7,6 +7,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="model.DashboardStats"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -108,14 +109,14 @@ ResultSet resultSet = null;
             <div class="menu-item">
                 <div class="menu-left">
                 <i class="fa-solid fa-box"></i>
-                <span style="color: #fff; text-decoration: none;"><a  href="#" onclick="loadOrderDetails()"> Order Management</a></span>                
+                <span><a  style="color: #fff; text-decoration: none;" href="#" onclick="loadOrderDetails()"> Order Management</a></span>                
                 </div>
             </div>
                      
             <div class="menu-item">
                 <div class="menu-left">
                 <i class="fas fa-file"></i>
-                <span>Report Generation</span>
+                <span><a  style="color: #fff; text-decoration: none;" href="#" onclick="loadReport()"> Report Generation</a></span>  
                 </div>
             </div>
             <div class="menu-item">
@@ -143,7 +144,11 @@ ResultSet resultSet = null;
                 <h1>Dashboard</h1>
                 <p>Control panel</p>
             </div>
-            
+              
+            <%--
+                DashboardStats stats = (DashboardStats) request.getAttribute("stats");
+            --%>
+           
             <div class="stats-grid">               
                 <!-- Stat Card 5 -->
                 <div class="stat-card">
@@ -178,12 +183,35 @@ ResultSet resultSet = null;
                     </div>
                 </div>
                 
+                <!--
+                <div class="start-card">
+                    <div class="stat-card-header gray">
+                        <h2 class="number"><%--= stats.getTotalOrders()--%></h2>
+                        <div class="label"><p class="label">Total Orders</p></div>
+                    </div>
+                </div>
+
+                <div class="start-card">
+                    <div class="stat-card-header gray">
+                        <h2 class="number"><%--= stats.getTotalCustomers()--%></h2>
+                        <div class="label"><p class="label">Total Customers</p></div>
+                    </div>
+                </div>
+
+                <div class="start-card">
+                    <div class="stat-card-header gray">
+                        <h2 class="number"><%--= stats.getTotalItemsSold()--%></h2>
+                        <div class="label"><p class="label">Total Items Sold</p></div>
+                    </div>
+                </div>
+                -->      
                 
+            </div>
                 
             </div>
         </div>
     </div>
-</div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
         const staffToggle = document.querySelector(".staff-toggle");
@@ -251,7 +279,7 @@ ResultSet resultSet = null;
         
     // Function to load Order Details
         function loadOrderDetails() {
-            fetch('OrderManagement.jsp')
+            fetch('/GlowyDaysProjectNew/OrderServlett')
                 .then(response => response.text())
                 .then(data => {
                     document.querySelector('.dashboard-content').innerHTML = data;
@@ -261,8 +289,20 @@ ResultSet resultSet = null;
                 });
         }
         
+    // Function to load Report 
+    function loadReport() {
+        fetch('/GlowyDaysProjectNew/ReportGenServlet')
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector('.dashboard-content').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading product list:', error);
+            });
+    }
+        
 </script>
 </body>
 
-<script link="../JavaScript/Panel.js"></script>
+<script link="../Javascript/Panel.js"></script>
 </html>

@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit User</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link href="../CSS/Edit.css" rel="stylesheet" type="text/css">
+        <link href="../CSS/Edit.css?v=2" rel="stylesheet" type="text/css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 <body>
@@ -121,6 +121,9 @@
                 <div>
                     
                 <form action="<%= request.getContextPath() %>/UpdateUserDetailsAdmin" method="post">
+                <input type="hidden" name="id" value="<%= user.getId() %>" />
+                <input type="hidden" id="originalPassword" name="originalPassword" value="<%= user.getPassword() %>" />
+
                     <input type="hidden" name="id" value="<%= user.getId() %>" />
 
                     <div class="form-row">
@@ -158,8 +161,10 @@
                                 type="password" 
                                 id="passwordInput" 
                                 name="password" 
+                                value="" 
                                 placeholder="Enter new password only if you want to change"
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                onkeyup="checkPasswordInput()"
                             />
 
                             <div id="passwordMessage" style="display: none;">
@@ -186,6 +191,35 @@
     <% } else { %>
         <p style="color: red;">⚠️ Customer not found.</p>
     <% } %>
+    
+    <script>
+    $(document).ready(function () {
+        // 标记是否需要回填原始密码
+        var isPasswordEmpty = false;
+
+        // 监听输入框的变化，检查是否为空
+        $('#passwordInput').on('input', function() {
+            // 只在输入框为空时设置标志
+            if ($(this).val() === "") {
+                isPasswordEmpty = true;
+            } else {
+                isPasswordEmpty = false;
+            }
+        });
+
+        // 在提交表单时检查密码是否为空
+        $('form').on('submit', function(e) {
+            var password = $('#passwordInput').val(); // 获取当前密码输入框的值
+
+            // 只有当密码为空并且输入框已经清空时，才回填原始密码
+            if (isPasswordEmpty) {
+                e.preventDefault(); // 阻止表单立即提交
+                $('#passwordInput').val($('#originalPassword').val()); // 设置密码框的值为原始密码
+                this.submit(); // 现在手动提交表单
+            }
+        });
+    });
+    </script>
     
     <!-- Full name validation (No special character)-->
     <script>
@@ -378,6 +412,16 @@
 
     <!-- Password validation (Meet with requirement)-->
     <script>
+        function checkPasswordInput() {
+            var passwordInput = document.getElementById("passwordInput");
+            var originalPassword = document.getElementById("originalPassword").value;
+
+            // If the password input is empty, keep the original password in the hidden input
+            if (passwordInput.value.trim() === "") {
+                passwordInput.value = originalPassword; // Ensure the hidden field value remains the original password
+            }
+        }
+        
         $(document).ready(function(){
             $('#passwordInput').on('keyup', function(){
                 var password = $(this).val();

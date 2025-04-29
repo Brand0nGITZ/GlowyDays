@@ -14,39 +14,40 @@
         <!-- CSS -->
         <link rel="stylesheet" href="../CSS/home.css?v=3">
         <!-- <link rel="stylesheet" href="../CSS/home.css?v=2"> -->
+        <style>
+        .logo img {
+            width: 90px; /* Adjust the width according to your design */
+            height: 60px; /* Keep aspect ratio */
+            display: block;
+        }
+        </style>
     </head>
     <body>
         <section id="header" class="header">
-            <a href="UserHome.jsp">
-                <h2 style="font-weight: bolder; font-size: 3rem; color: black;">GLOWY DAYS</h2>
+            <a href="GuestHome.jsp" class="logo">
+                <img src="../ICON/logo2.png" alt="Glowy Days Logo">
             </a>
             <div class="navbar">
-                <a href="UserHome.jsp">Home</a>
-                <a href="<%= request.getContextPath() %>/ProductServlet">Product</a>
-                <a href="<%= request.getContextPath() %>/PromotionProductsServlet">Promotion</a>              
-                <a href="">About Us</a>                           
+                <a href="GuestHome.jsp">Home</a>
+                <a href="<%= request.getContextPath()%>/ProductServlet">Product</a>
+                <a href="<%= request.getContextPath()%>/PromotionProductsServlet">Promotion</a>              
+                <a href="AboutUs.jsp">About Us</a>                           
             </div>
             <div class="icons">
                 <div class="search-wrapper">
                     <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
                     <input type="text" id="search-box" placeholder="Search..." />
                 </div>
-                <a href="" class="fa-solid fa-cart-shopping"></a>    
+                <a href="<%= request.getContextPath()%>/LoadCartServlet" class="fa-solid fa-cart-shopping"></a>    
                 <div class="avatar-container">
                     <i class="fa-regular fa-user" style="font-size:18px; cursor:pointer;"></i> 
                     <div class="dropdown-menu">
-                         <%
-                        Long userID = (Long) session.getAttribute("userID");
-                        String username = (String) session.getAttribute("username");
-                        
-                        %>
-                 <a style="pointer-events: none;">Username: <%= username %></a>
-                        <a class="dropdown-item" href="../JSP/UserProfile.jsp">User Profile</a>
-                        <a class="dropdown-item" href="<%= request.getContextPath() %>/LogoutServlet">Log Out</a>
+                        <a class="dropdown-item" href="AddNewUser.jsp">Register</a>
+                        <a class="dropdown-item" href="Login.jsp">Log In</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>  
                     
        <!-- About Us Section -->
 <section class="about-us">
@@ -115,10 +116,10 @@
 
           <div class="box">
             <h3>Quick Links</h3>
-            <a href="#"><i class="fas fa-angle-right"></i> Home</a>
-            <a href="#"><i class="fas fa-angle-right"></i> Product</a>
-            <a href="#"><i class="fas fa-angle-right"></i> About Us</a>
-            <a href="#"><i class="fas fa-angle-right"></i> Contact Us</a>
+            <a href="GuestHome.jsp"><i class="fas fa-angle-right"></i> Home</a>
+            <a href="<%= request.getContextPath() %>/ProductServlet"><i class="fas fa-angle-right"></i> Product</a>
+            <a href="<%= request.getContextPath() %>/PromotionProductsServlet"><i class="fas fa-angle-right"></i> Promotion</a>
+            <a href="AboutUs.jsp"><i class="fas fa-angle-right"></i> About Us</a>
           </div>
 
           <div class="box">
@@ -133,13 +134,13 @@
             <h3>Contact Info</h3>
             <a href="#"><i class="fas fa-phone"></i> +6018-9064828</a>
             <a href="#"><i class="fas fa-phone"></i> +6012-3456789</a>
-            <a href="#"><i class="fas fa-envelope"></i> tansm-wm23@student.tarc.edu.my</a>
+            <a href="mailto:glowydays05@gmail.com"><i class="fas fa-envelope"></i> glowydays05@gmail.com</a>
             <a href="#"><i class="fas fa-map-marker-alt"></i> Kuala Lumpur, Malaysia</a>
 
             <div class="share">
-              <a href="#" class="fab fa-facebook-f"></a>
-              <a href="#" class="fab fa-instagram"></a>
-              <a href="#" class="fab fa-twitter"></a>
+              <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+              <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+              <a href="https://x.com/" class="fab fa-twitter"></a>
             </div>
           </div>
 
@@ -155,4 +156,5 @@
         </div>
      </section>
     </body>
+    <script src="../JavaScript/main.js"></script>
 </html>

@@ -132,14 +132,14 @@
                                     <button 
                                         class="green-button" 
                                         type="button"
-                                        onclick="openModal('<%= o.getOrderId()%>')"
+                                        onclick="openModall('<%= o.getOrderId()%>')"
                                         <%= o.getTrackingNo() != null ? "disabled" : ""%>>
                                         Add Tracking No
                                     </button>
                                     <button 
                                         class="green-button" 
-                                        type="button"
-                                        onclick="location.href = 'OrderDetailsServlet?orderId=<%= o.getOrderId()%>'"
+                                        type="button"onclick
+                                        onclick="location.href = '/GlowyDaysProjectNew/OrderDetailsServlet?orderId=<%= o.getOrderId()%>'"
                                         title="View Order Details">
                                         <i class="fas fa-eye"></i>
                                     </button>
@@ -192,7 +192,7 @@
         </div>
 
         <script>
-            function openModal(orderId) {
+            function openModall(orderId) {
                 document.getElementById("trackingModal").style.display = "block";
                 document.getElementById("modalOrderId").value = orderId;
                 document.getElementById("displayOrderId").textContent = orderId;
@@ -203,6 +203,7 @@
             }
 
             window.onclick = function (event) {
+
                 const modal = document.getElementById("trackingModal");
                 if (event.target == modal) {
                     modal.style.display = "none";

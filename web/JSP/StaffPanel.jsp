@@ -32,15 +32,15 @@ ResultSet resultSet = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Dashboard</title>
+    <title>Master Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../CSS/AdminPanel.css">
+    <link rel="stylesheet" href="../CSS/AdminPanel.css?v=2">
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <h2>Staff Panel</h2>
+            <h2>Master Admin</h2>
             <i class="fas fa-bars"></i>
         </div>
         <div class="sidebar-menu">
@@ -68,28 +68,41 @@ ResultSet resultSet = null;
                 </div>
             </div>
 
-            <div class="menu-item">
+            <div class="menu-item product-toggle">
                 <div class="menu-left">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 <span>Product Management</span>
                 </div>
+                <i class="fas fa-chevron-right menu-arrow"></i>
             </div>
+            
+            <!-- Dropdown Submenu -->
+            <div class="submenu" style="display: none;">
+                <div class="submenu-item">
+                    <a href="AddProduct.jsp"> Add Product </a>
+                </div>
+                <div class="submenu-item">
+                    <a href="#" onclick="loadProductList()"> Product Listing</a>
+                </div>
+            </div>
+            
             <div class="menu-item">
                 <div class="menu-left">
                 <i class="fa-solid fa-box"></i>
-                <span>Order Management</span>
+                <span><a  style="color: #fff; text-decoration: none;" href="#" onclick="loadOrderDetails()"> Order Management</a></span>                
                 </div>
             </div>
+                     
             <div class="menu-item">
                 <div class="menu-left">
                 <i class="fas fa-file"></i>
-                <span>Report Generation</span>
+                <span><a  style="color: #fff; text-decoration: none;" href="#" onclick="loadReport()"> Report Generation</a></span>  
                 </div>
             </div>
             <div class="menu-item">
                 <div class="menu-left">
                 <i class="fa-regular fa-user"></i>
-                <span>Logout</span>
+                <a style="color: #fff; text-decoration: none;" href="<%= request.getContextPath() %>/LogoutServlet">Log Out</a>
                 </div>
             </div>            
         </div>
@@ -104,10 +117,6 @@ ResultSet resultSet = null;
                 <span>/</span>
                 <a href="#">Dashboard</a>
             </div>
-            <div class="user-dropdown">
-                <span>Layout Admin</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
         </div>
         
         <div class="dashboard-content">
@@ -116,40 +125,7 @@ ResultSet resultSet = null;
                 <p>Control panel</p>
             </div>
             
-            <div class="stats-grid">
-                <!-- Stat Card 1 -->
-                <div class="stat-card">
-                    <div class="stat-card-header blue">
-                        <div class="number">4</div>
-                        <div class="label">Customer Management</div>
-                    </div>
-                    <div class="stat-card-footer blue">
-                        <a href="#">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                
-                <!-- Stat Card 3 -->
-                <div class="stat-card">
-                    <div class="stat-card-header red">
-                        <div class="number">70</div>
-                        <div class="label">Product Management</div>
-                    </div>
-                    <div class="stat-card-footer red">
-                        <a href="#">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                
-                <!-- Stat Card 4 -->
-                <div class="stat-card">
-                    <div class="stat-card-header green">
-                        <div class="number">20</div>
-                        <div class="label">Order Management</div>
-                    </div>
-                    <div class="stat-card-footer green">
-                        <a href="#">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                
+            <div class="stats-grid">               
                 <!-- Stat Card 5 -->
                 <div class="stat-card">
                     <div class="stat-card-header dark-blue">
@@ -182,14 +158,12 @@ ResultSet resultSet = null;
                         <a href="#">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                
-                
-                
             </div>
         </div>
     </div>
 </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
         const customerToggle = document.querySelector(".customer-toggle");
         const customerSubmenu = customerToggle.nextElementSibling; // the next .submenu after customer-toggle
@@ -199,7 +173,18 @@ ResultSet resultSet = null;
             customerSubmenu.style.display = customerSubmenu.style.display === "none" ? "block" : "none";
             customerArrow.classList.toggle("rotate");
         });
-    });
+
+        // New: Product Toggle
+        const productToggle = document.querySelector(".product-toggle");
+        const productSubmenu = productToggle.nextElementSibling; // the next .submenu after product-toggle
+        const productArrow = productToggle.querySelector(".menu-arrow");
+
+        productToggle.addEventListener("click", function () {
+            productSubmenu.style.display = productSubmenu.style.display === "none" ? "block" : "none";
+            productArrow.classList.toggle("rotate");
+        });
+    
+});
 
     function loadCustomerList() {
         fetch('CustomerManagement.jsp')
@@ -211,6 +196,44 @@ ResultSet resultSet = null;
                 console.error('Error loading customer list:', error);
             });
     }
+    
+    // Function to load product list
+        function loadProductList() {
+            fetch('ProductList.jsp')
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector('.dashboard-content').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading product list:', error);
+                });
+        }
+        
+    // Function to load Order Details
+        function loadOrderDetails() {
+            fetch('OrderManagement.jsp')
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector('.dashboard-content').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading product list:', error);
+                });
+        }
+        
+    // Function to load Order Details
+    function loadReport() {
+        fetch('ReportGen.jsp')
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector('.dashboard-content').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading product list:', error);
+            });
+    }
 </script>
 </body>
+
+<script link="../Javascript/Panel.js"></script>
 </html>

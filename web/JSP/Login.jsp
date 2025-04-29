@@ -22,8 +22,7 @@
             <a href="GuestHome.jsp">Home</a>
             <a href="Product.jsp">Product</a>
             <a href="">About Us</a>               
-            <a href="">Contact Us</a>   
-            
+            <a href="">Contact Us</a>                             
         </div>
         <div class="icons">
             <div class="search-wrapper">
@@ -41,7 +40,7 @@
             <h1 class="login-title">Log in</h1>
             <p class="login-subtitle">Please fill in the fields below</p>
             
-            <form id="loginForm" method="post" class="login-form">
+            <form action="/UserLogin"id="loginForm" method="post" class="login-form">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -157,17 +156,17 @@
     <script>
         $(document).ready(function () {
             $('#loginForm').on('submit', function (e) {
-                e.preventDefault();
+                e.preventDefault();  // 阻止默认提交行为
 
                 var email = $('#email').val().trim();
                 var password = $('#password').val().trim();
                 var isValid = true;
 
-                // Clear previous validation messages
+                // 清空之前的验证错误
                 $('#emailValidation').html('');
                 $('#passwordValidation').html('');
 
-                // Validate password (check if it's empty)
+                // 简单的前端验证
                 if (password.length === 0) {
                     $('#passwordValidation').html('<span style="color:red; font-size:13px;">Password is required.</span>');
                     isValid = false;
@@ -175,18 +174,36 @@
 
                 if (!isValid) return;
 
-                // AJAX call to validate login credentials
+                // 使用 AJAX 向后端验证密码
                 $.ajax({
                     type: 'POST',
-                    url: '/GlowyDaysProjectNew/LoginPassword',
+                    url: '/GlowyDaysProjectNew/LoginPassword',  // 修改为实际的Servlet路径
                     data: { email: email, password: password },
                     success: function (response) {
+                        console.log("Response from backend: ", response);  // 输出后端返回的数据
+
                         if (response.trim() === "Not login") {
                             $('#passwordValidation').html('<span style="color:red; font-size:13px;">Invalid password! Please try again!</span>');
-                            $('#password').val(''); // Clear password field after incorrect input
+                            $('#password').val('');
                         } else {
-                            window.location.href = '../LoadCartServlet'; // Redirect to home page if login is successful
-                            // TESTING PRODUCTSERVLET 
+                            // 打印角色，检查返回的角色
+                            console.log("Role received: ", response.trim());
+
+                            var role = response.trim();  // 假设后端返回的是角色信息
+
+                            switch (role) {
+                                case "manager":
+                                    window.location.href = "AdminPanel.jsp";  // 重定向到管理员面板
+                                    break;
+                                case "staff":
+                                    window.location.href = "StaffPanel.jsp";  // 重定向到员工面板
+                                    break;
+                                case "customer":
+                                    window.location.href = "UserHome.jsp";  // 重定向到用户主页
+                                    break;
+                                default:
+                                    alert("Unknown role: " + role);
+                            }
                         }
                     },
                     error: function () {
